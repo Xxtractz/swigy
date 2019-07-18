@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="swigy" />
+        <module name="swingy" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="swigy" target="1.5" />
+      <module name="swingy" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
