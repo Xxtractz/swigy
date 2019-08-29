@@ -1,5 +1,11 @@
 package swingy.controller;
 
-public class GameController {
+import swingy.view.IDisplay;
 
+public class GameController {
+    public IDisplay display;
+
+    public GameController(String view){
+
+    }
 }
