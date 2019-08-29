@@ -1,4 +1,4 @@
-package view;
+package swingy.view;
 
 public class Gui {
 }
