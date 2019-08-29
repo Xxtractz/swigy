@@ -8,4 +8,9 @@ public class GameController {
     public GameController(String view){
 
     }
+
+    public void runGame(){
+        while (true){
+        }
+    }
 }
