@@ -1,16 +1,15 @@
 package swingy.controller;
 
 import swingy.view.IDisplay;
+import swingy.view.console.Console;
 
 public class GameController {
     public IDisplay display;
 
     public GameController(String view){
-
-    }
-
-    public void runGame(){
-        while (true){
+        if(view == "console"){
+            new Console();
         }
     }
+
 }
