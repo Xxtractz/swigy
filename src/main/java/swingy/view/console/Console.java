@@ -1,7 +1,14 @@
 package swingy.view.console;
 
+import swingy.utils_swingy.SwingyUtils;
+
+import java.util.Scanner;
+
 public class Console {
+    public Scanner stdInput;
+
     public Console(){
-        System.out.println("this is a test run");
+        new SwingyUtils().printAsterix(50);
+        System.out.println("*                           Welcome To Swingy                             *");
     }
 }
