@@ -1,14 +1,13 @@
 package swingy.controller;
-
+import org.jetbrains.annotations.NotNull;
 import swingy.view.IDisplay;
-import swingy.view.console.Console;
 
 public class GameController {
-    public IDisplay display;
+    private IDisplay display;
 
-    public GameController(String view){
-        if(view == "console"){
-            new Console();
+    public GameController(@NotNull String view){
+        if(view.equals("console")){
+            this.display.initGame();
         }
     }
 
