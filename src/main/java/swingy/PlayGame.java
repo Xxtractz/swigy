@@ -2,10 +2,16 @@ package swingy;
 
 import swingy.utils_swingy.SwingyUtils;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlayGame {
     private SwingyUtils utils = new SwingyUtils();
+    Scanner Input = new Scanner(System.in);
+    String playerName = "";
+
+    ArrayList<String> playerAttr = new ArrayList<String>( );
+
     public static void main(String[] args) {
 //        final GameController console = new GameController("console");
         PlayGame game = new PlayGame();
@@ -15,7 +21,7 @@ public class PlayGame {
     private void initiateGame(){
         header();
         do {
-            prompt();
+            Start();
         } while (true);
     }
 
@@ -25,8 +31,26 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
-    private void prompt(){
-        Scanner input = new Scanner(System.in);
+    private void Start(){
+        getUser();
+
+        getPlayerAttr();
+    }
+
+    private void getUser(){
+        System.out.println("Hi, please enter your Username?");
+        playerName = Input.nextLine();
+        utils.printAsterix(75);
+    }
+
+    private void getPlayerAttr(){
+        System.out.println(this.playerName+", please Select Hero");
+
+        System.out.println("Hero\t\t\tGunMan\t\t\tSwordMan\n" +
+                            "*******\t\t\t*******\t\t\t********\n" +
+                            "Xpr\t\t\t\t100px\t\t\t100px");
+        String Att = Input.nextLine();
+        playerAttr.add(Att);
 
     }
 }
