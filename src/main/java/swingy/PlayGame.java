@@ -73,6 +73,7 @@ public class PlayGame {
                 }
             }
         board[4][4] ="H";
+            board[7][7] = "\033[31mV\033[0m";
 
 //        System.out.println(Arrays.deepToString(board));
 //        System.exit(1);
