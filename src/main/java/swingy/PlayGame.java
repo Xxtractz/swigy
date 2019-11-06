@@ -4,9 +4,11 @@ import swingy.utils_swingy.SwingyUtils;
 
 import javax.crypto.spec.PSource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayGame {
+    int size;   // Horizontal and Vertical Axis
     private SwingyUtils utils = new SwingyUtils();
     Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -52,30 +54,49 @@ public class PlayGame {
                             "Xpr\t\t\t\t100px\t\t\t100px");
         String Att = Input.nextLine();
         playerAttr.add(Att);
-        printMap(10,"");
+        printMap(20,"");
 
     }
 
     private void printMap(int boardSize, String Player){
-        int size;   // Horizontal and Vertical Axis
-        int x;      // Vertical Axis
-        int y;      // Horizontal Axis
+        int vertical;      // Vertical Axis
+        int horizontal;      // Horizontal Axis
 
-        size = boardSize/2;
-        String Grid [][] = {{}};
+        this.size = boardSize/2;
         String player;
         String Velian;
 
-//        Prints Map
-        for(y = 0;y  < size; y++){
-            for (x = 0; x < size ; x++) {
-                System.out.print("| "+ Grid[x][0] + " ");
+        String[][] board = new String[this.size][this.size];
+            for(horizontal = 0;horizontal  < this.size; horizontal++) {
+                for (vertical = 0; vertical < this.size; vertical++) {
+                    board[horizontal][vertical] = null;
+                }
             }
-            if (x == size) {
+        board[4][4] ="H";
+
+//        System.out.println(Arrays.deepToString(board));
+//        System.exit(1);
+//        Prints Map
+        for(horizontal = 0;horizontal  < this.size; horizontal++){
+            for (vertical = 0; vertical < this.size ; vertical++) {
+                if (board[horizontal][vertical] == null)
+                {
+//                    assert board[horizontal][vertical] != null;
+//                    board[horizontal][vertical].remove("null");
+//                    board[horizontal][vertical].add(".");
+//                    System.out.print("| "+ board[horizontal][vertical]  + " ");
+                    System.out.print("| . ");
+                }
+                else {
+                    System.out.print("| "+ board[horizontal][vertical]  + " ");
+                }
+            }
+            if (vertical == this.size) {
                 System.out.print("|");
             }
             System.out.print("\n");
         }
         System.out.print("\n");
+        System.exit(0);
     }
 }
