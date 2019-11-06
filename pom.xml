@@ -35,7 +35,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>swingy.Main</mainClass>
+                            <mainClass>swingy.PlayGame</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
