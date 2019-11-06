@@ -52,20 +52,26 @@ public class PlayGame {
                             "Xpr\t\t\t\t100px\t\t\t100px");
         String Att = Input.nextLine();
         playerAttr.add(Att);
-        printMap(10,10);
+        printMap(10,"");
 
     }
 
-    private void printMap(int width, int hieght){
-        int x;  // Vertical Axis
-        int y;  // Horizontal Axis
+    private void printMap(int boardSize, String Player){
+        int size;   // Horizontal and Vertical Axis
+        int x;      // Vertical Axis
+        int y;      // Horizontal Axis
+
+        size = boardSize/2;
+        String Grid [][] = {{}};
+        String player;
+        String Velian;
 
 //        Prints Map
-        for(y = 0;y  < hieght; y++){
-            for (x = 0; x < width ; x++) {
-                System.out.print("| . ");
+        for(y = 0;y  < size; y++){
+            for (x = 0; x < size ; x++) {
+                System.out.print("| "+ Grid[x][0] + " ");
             }
-            if (x == width) {
+            if (x == size) {
                 System.out.print("|");
             }
             System.out.print("\n");
