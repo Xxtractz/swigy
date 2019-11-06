@@ -2,6 +2,7 @@ package swingy;
 
 import swingy.utils_swingy.SwingyUtils;
 
+import javax.crypto.spec.PSource;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,6 +52,24 @@ public class PlayGame {
                             "Xpr\t\t\t\t100px\t\t\t100px");
         String Att = Input.nextLine();
         playerAttr.add(Att);
+        printMap(10,10);
 
+    }
+
+    private void printMap(int width, int hieght){
+        int x;  // Vertical Axis
+        int y;  // Horizontal Axis
+
+//        Prints Map
+        for(y = 0;y  < hieght; y++){
+            for (x = 0; x < width ; x++) {
+                System.out.print("| . ");
+            }
+            if (x == width) {
+                System.out.print("|");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
     }
 }
