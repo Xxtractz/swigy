@@ -34,6 +34,15 @@ public class PlayGame {
         } while (true);
     }
 
+    private void Start(){
+        getUser();
+
+        printHeroOpt();
+        initHero();
+        printMap(this.herolevel,"");
+    }
+
+//    Header
     private void header(){
         System.out.println((
                         "/************************************************************************************/\n" +
@@ -43,33 +52,36 @@ public class PlayGame {
                         "/************************************************************************************/").toUpperCase());
     }
 
-    private void Start(){
-        getUser();
-
-        getPlayerAttr();
-    }
-
+//    Get User Prompt
     private void getUser(){
         System.out.print("Hi, Welcome to Swingy, Please enter your Name: ");
         playerName = Input.nextLine();
         utils.printAsterix(75);
     }
 
-    private void getPlayerAttr(){
-        System.out.println(this.playerName+", please Select Hero");
-
+    private void printHeroOpt(){
         System.out.println(
-                "Would you like to\n" +
-                "1. Create a New Hero\n" +
-                "2. Select previous Hero");
-        String Att = Input.nextLine();
-
-        playerAttr.add(Att);
-        utils.printAsterix(75);
-        initHero();
-        printMap(this.herolevel,"");
-
+                "\033[0;33m"+this.playerName.toUpperCase()+"\033[0m"+
+                        ", Please Select Below\n" +
+                        "1. Create a New Hero\n" +
+                        "2. Select previous Hero");
+        int Att = Input.nextInt();
+        selectHeroOpt(Att);
     }
+    private void selectHeroOpt(int Att){
+        if (Att == 1){
+            System.out.println("1 was selected");
+        }
+        else if(Att == 2){
+            System.out.println("2 was selected");
+        }
+        else {
+            System.err.println("You have entered an invalid Entry... \nPlease try again");
+            printHeroOpt();
+        }
+        utils.printAsterix(75);
+    }
+
 
     private void initHero(){
         this.heroName = "Batman";
