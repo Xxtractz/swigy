@@ -6,6 +6,7 @@ import java.util.*;
 public class PlayGame {
     int size;   // row and column Axis
     String heroName;
+    int heroType;
     int herolevel;
     int exp;
     int att;
@@ -32,9 +33,7 @@ public class PlayGame {
 
     private void Start(){
         getUser();
-
         printHeroOpt();
-        initHero();
         printMap(this.herolevel,"");
     }
 
@@ -64,6 +63,7 @@ public class PlayGame {
         int Att = Input.nextInt();
         selectHeroOpt(Att);
     }
+
     private void selectHeroOpt(int Att){
         if (Att == 1){
             createHero();
@@ -78,14 +78,63 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
+    private void createHero(){
+        System.out.print("Lets Create your Hero.!!\n");
 
-    private void initHero(){
-        this.heroName = "Batman";
-        this.herolevel = 1;
+        setHeroName(promptHeroName());
+        setHeroType(promptHeroType());
+
+    }
+    public String promptHeroName(){
+        System.out.print("Please enter Hero Name:");
+        String _heroName = Input.nextLine();
+
+        if (_heroName.length() < 2){
+            System.err.println("You have entered invalid Hero Name. Please Try Again");
+            promptHeroName();
+        }
+        return _heroName;
     }
 
-    private void createHero(){
+    public void setHeroName(String heroName) {
+        this.heroName = heroName;
+    }
 
+    public int promptHeroType(){
+        System.out.print("" +
+                "\n Please Choose Hero Type\n" +
+                "1. Thor\n" +
+                "2. Iron Man\n" +
+                "3. Black Panther");
+        int _heroType = Input.nextInt();
+        if(_heroType != 1 || _heroType != 2 ||_heroType != 3 ){
+            System.err.println("You have enter invalid entry, Please try again.");
+            promptHeroType();
+        }
+        return _heroType;
+    }
+    public void setHeroType(int heroType) {
+        this.heroType = heroType;
+    }
+
+    public void setHerolevel(int herolevel) {
+        this.herolevel = herolevel;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    public void setAtt(int att) {
+        this.att = att;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
     }
 
     private void printMap(int level, String Player){
