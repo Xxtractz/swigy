@@ -8,7 +8,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayGame {
-    int size;   // Horizontal and Vertical Axis
+    int size;   // row and column Axis
+    String heroName;
+    int herolevel;
+    int exp;
+    int att;
+    int def;
+    int hp;
     private SwingyUtils utils = new SwingyUtils();
     Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -29,9 +35,12 @@ public class PlayGame {
     }
 
     private void header(){
-        utils.printAsterix(75);
-        System.out.println("\n\t\t\t\t\t\t\t Welcome To Swing \t\t\t\t\n".toUpperCase());
-        utils.printAsterix(75);
+        System.out.println((
+                        "/************************************************************************************/\n" +
+                        "/*                                                                                  */\n" +
+                        "/*                             Welcome To Swingy                                    */\n" +
+                        "/*                                                                                  */\n" +
+                        "/************************************************************************************/").toUpperCase());
     }
 
     private void Start(){
@@ -41,7 +50,7 @@ public class PlayGame {
     }
 
     private void getUser(){
-        System.out.println("Hi, please enter your Username?");
+        System.out.print("Hi, Welcome to Swingy, Please enter your Name: ");
         playerName = Input.nextLine();
         utils.printAsterix(75);
     }
@@ -49,50 +58,58 @@ public class PlayGame {
     private void getPlayerAttr(){
         System.out.println(this.playerName+", please Select Hero");
 
-        System.out.println("Hero\t\t\tGunMan\t\t\tSwordMan\n" +
-                            "*******\t\t\t*******\t\t\t********\n" +
-                            "Xpr\t\t\t\t100px\t\t\t100px");
+        System.out.println(
+                "Would you like to\n" +
+                "1. Create a New Hero\n" +
+                "2. Select previous Hero");
         String Att = Input.nextLine();
+
         playerAttr.add(Att);
-        printMap(20,"");
+        utils.printAsterix(75);
+        initHero();
+        printMap(this.herolevel,"");
 
     }
 
-    private void printMap(int boardSize, String Player){
-        int vertical;      // Vertical Axis
-        int horizontal;      // Horizontal Axis
+    private void initHero(){
+        this.heroName = "Batman";
+        this.herolevel = 1;
+    }
 
-        this.size = boardSize/2;
+    private void printMap(int level, String Player){
+        int column;      // column Axis
+        int row;      // row Axis
+
+        int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
+        int center = boardSize/2;
         String player;
         String Velian;
 
-        String[][] board = new String[this.size][this.size];
-            for(horizontal = 0;horizontal  < this.size; horizontal++) {
-                for (vertical = 0; vertical < this.size; vertical++) {
-                    board[horizontal][vertical] = null;
+        String[][] board = new String[boardSize][boardSize];
+            for(row = 0;row  < boardSize; row++) {
+                for (column = 0; column < boardSize; column++) {
+                    board[row][column] = null;
                 }
             }
-        board[4][4] ="H";
-            board[7][7] = "\033[31mV\033[0m";
+        board[center][center] ="\033[0;33mH\033[0m";
+            board[3][3] = "\033[31mV\033[0m";
 
-//        System.out.println(Arrays.deepToString(board));
-//        System.exit(1);
 //        Prints Map
-        for(horizontal = 0;horizontal  < this.size; horizontal++){
-            for (vertical = 0; vertical < this.size ; vertical++) {
-                if (board[horizontal][vertical] == null)
+        for(row = 0;row  < boardSize; row++){
+            for (column = 0; column < boardSize ; column++) {
+                if (board[row][column] == null)
                 {
-//                    assert board[horizontal][vertical] != null;
-//                    board[horizontal][vertical].remove("null");
-//                    board[horizontal][vertical].add(".");
-//                    System.out.print("| "+ board[horizontal][vertical]  + " ");
+//                    assert board[row][column] != null;
+//                    board[row][column].remove("null");
+//                    board[row][column].add(".");
+//                    System.out.print("| "+ board[row][column]  + " ");
                     System.out.print("| . ");
                 }
                 else {
-                    System.out.print("| "+ board[horizontal][vertical]  + " ");
+                    System.out.print("| "+ board[row][column]  + " ");
                 }
             }
-            if (vertical == this.size) {
+            if (column == boardSize) {
                 System.out.print("|");
             }
             System.out.print("\n");
