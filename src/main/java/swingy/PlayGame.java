@@ -1,11 +1,7 @@
 package swingy;
 
 import swingy.utils_swingy.SwingyUtils;
-
-import javax.crypto.spec.PSource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class PlayGame {
     int size;   // row and column Axis
@@ -62,7 +58,7 @@ public class PlayGame {
     private void printHeroOpt(){
         System.out.println(
                 "\033[0;33m"+this.playerName.toUpperCase()+"\033[0m"+
-                        ", Please Select Below\n" +
+                        "!, Please Select Below, to Proceed\n" +
                         "1. Create a New Hero\n" +
                         "2. Select previous Hero");
         int Att = Input.nextInt();
@@ -70,7 +66,7 @@ public class PlayGame {
     }
     private void selectHeroOpt(int Att){
         if (Att == 1){
-            System.out.println("1 was selected");
+            createHero();
         }
         else if(Att == 2){
             System.out.println("2 was selected");
@@ -86,6 +82,10 @@ public class PlayGame {
     private void initHero(){
         this.heroName = "Batman";
         this.herolevel = 1;
+    }
+
+    private void createHero(){
+
     }
 
     private void printMap(int level, String Player){
