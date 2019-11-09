@@ -3,15 +3,17 @@ package swingy;
 import swingy.utils_swingy.SwingyUtils;
 import java.util.*;
 
+import static java.lang.Integer.*;
+
 public class PlayGame {
     int size;   // row and column Axis
-    String heroName;
-    int heroType;
-    int herolevel;
-    int exp;
-    int att;
-    int def;
-    int hp;
+    private String heroName;
+    private String heroType;
+    private int herolevel;
+    private int exp;
+    private int att;
+    private int def;
+    private int hp;
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -60,9 +62,18 @@ public class PlayGame {
                         "!, Please Select Below, to Proceed\n" +
                         "1. Create a New Hero\n" +
                         "2. Select previous Hero");
-        int Att = Integer.parseInt(Input.nextLine());
-        utils.printAsterix(75);
-        selectHeroOpt(Att);
+        int Att = Input.nextInt();
+        if (Att == 1) {
+            utils.printAsterix(75);
+            selectHeroOpt(Att);
+        }else if (Att == 2) {
+            utils.printAsterix(75);
+            selectHeroOpt(Att);
+        } else {
+            System.err.println("Invalid Entry... Please try Again");
+            printHeroOpt();
+        }
+
     }
 
     private void selectHeroOpt(int Att){
@@ -79,11 +90,13 @@ public class PlayGame {
 
     private void createHero(){
         System.out.print("Lets Create your Hero.!!\n");
+        utils.printAsterix(75);
         promptHeroName();
         promptHeroType();
         System.exit(1);
     }
     public void promptHeroName(){
+        this.Input.nextLine();
         System.out.print("Please enter Hero Name: ");
         String _heroName = this.Input.nextLine();
         if(_heroName.length() < 2){
@@ -94,28 +107,35 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
-    public void setHeroName(String heroName) {
+    private void setHeroName(String heroName) {
         this.heroName = heroName;
     }
 
-    public void promptHeroType(){
+    private void promptHeroType(){
         System.out.print("Please Choose Hero Type\n" +
                 "1. Thor\n" +
                 "2. Iron Man\n" +
                 "3. Black Panther\n");
-        int _heroType = Integer.parseInt(Input.nextLine());
-        if(_heroType != 1 || _heroType != 2 ||_heroType != 3 ){
-            System.err.println("You have enter invalid Hero type, Please try again.");
-            promptHeroType();
+        int _heroType = Input.nextInt();
+        switch (_heroType){
+            case 1:
+                setHeroType("Thor");
+                break;
+            case 2:
+                setHeroType("Iron Man");
+                break;
+            case 3:
+                setHeroType("Black Panther");
+                break;
+            default:
         }
-        setHeroType(_heroType);
         utils.printAsterix(75);
     }
-    public void setHeroType(int heroType) {
+    private void setHeroType(String heroType) {
         this.heroType = heroType;
     }
 
-    public void setHerolevel(int herolevel) {
+    private void setHerolevel(int herolevel) {
         this.herolevel = herolevel;
     }
 
