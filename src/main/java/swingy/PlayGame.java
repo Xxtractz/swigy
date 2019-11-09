@@ -128,6 +128,8 @@ public class PlayGame {
                 setHeroType("Black Panther");
                 break;
             default:
+                System.err.println("Invalid Entry....");
+                promptHeroType();
         }
         utils.printAsterix(75);
     }
