@@ -93,6 +93,8 @@ public class PlayGame {
         utils.printAsterix(75);
         promptHeroName();
         promptHeroType();
+        setHerolevel(1);
+        setExperience(0);
         System.exit(1);
     }
     public void promptHeroName(){
@@ -120,12 +122,15 @@ public class PlayGame {
         switch (_heroType){
             case 1:
                 setHeroType("Thor");
+                setHeroAttribute(100,55,120);
                 break;
             case 2:
                 setHeroType("Iron Man");
+                setHeroAttribute(75,60,120);
                 break;
             case 3:
                 setHeroType("Black Panther");
+                setHeroAttribute(45,100,120);
                 break;
             default:
                 System.err.println("Invalid Entry....");
@@ -141,20 +146,14 @@ public class PlayGame {
         this.herolevel = herolevel;
     }
 
-    public void setExp(int exp) {
+    public void setExperience(int exp) {
         this.exp = exp;
     }
 
-    public void setAtt(int att) {
-        this.att = att;
-    }
-
-    public void setDef(int def) {
-        this.def = def;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setHeroAttribute(int attack, int defence, int hitpoints) {
+        this.att = attack;
+        this.def = defence;
+        this.hp = hitpoints;
     }
 
     private void printMap(int level, String Player){
