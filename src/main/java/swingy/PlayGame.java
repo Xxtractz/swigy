@@ -144,25 +144,25 @@ public class PlayGame {
         this.herolevel = herolevel;
     }
 
-    public void setExperience(int exp) {
+    private void setExperience(int exp) {
         this.exp = exp;
     }
 
-    public void setHeroAttribute(int attack, int defence, int hitpoints) {
+    private void setHeroAttribute(int attack, int defence, int hitpoints) {
         this.att = attack;
         this.def = defence;
         this.hp = hitpoints;
     }
 
     private void printStats(){
-        System.out.println("Player     : "+this.playerName
-                        +"\nHeroName   : "+this.heroName
-                        +"\nHero Class : "+this.heroType
-                        +"\nXP         : "+this.exp
-                        +"\nLevel      : "+this.herolevel
-                        +"\nAttack     : "+this.att
-                        +"\nDefence    : "+this.def
-                        +"\nHit Points : "+this.hp);
+        System.out.println(utils.textRed("Player     : ")+utils.textBlue(this.playerName)
+                        +utils.textRed("\nHeroName   : ")+utils.textBlue(this.heroName)
+                        +utils.textRed("\nHero Class : ")+utils.textBlue(this.heroType)
+                        +utils.textRed("\nXP         : ")+utils.textBlueInt(this.exp)
+                        +utils.textRed("\nLevel      : ")+utils.textBlueInt(this.herolevel)
+                        +utils.textRed("\nAttack     : ")+utils.textBlueInt(this.att)
+                        +utils.textRed("\nDefence    : ")+utils.textBlueInt(this.def)
+                        +utils.textRed("\nHit Points : ")+utils.textBlueInt(this.hp));
         utils.printAsterix(75);
     }
 
