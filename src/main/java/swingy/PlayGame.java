@@ -36,6 +36,7 @@ public class PlayGame {
     private void Start(){
         getUser();
         printHeroOpt();
+        printStats();
         printMap(this.herolevel,"");
     }
 
@@ -52,7 +53,7 @@ public class PlayGame {
 //    Get User Prompt
     private void getUser(){
         System.out.print("Hi, Welcome to Swingy, Please enter your Name: ");
-        playerName = Input.nextLine();
+        playerName = Input.nextLine().toUpperCase();
         utils.printAsterix(75);
     }
 
@@ -73,7 +74,6 @@ public class PlayGame {
             System.err.println("Invalid Entry... Please try Again");
             printHeroOpt();
         }
-
     }
 
     private void selectHeroOpt(int Att){
@@ -85,7 +85,6 @@ public class PlayGame {
             System.err.println("You have entered an invalid Entry... \nPlease try again");
             printHeroOpt();
         }
-        utils.printAsterix(75);
     }
 
     private void createHero(){
@@ -93,9 +92,9 @@ public class PlayGame {
         utils.printAsterix(75);
         promptHeroName();
         promptHeroType();
+        utils.printAsterix(75);
         setHerolevel(1);
         setExperience(0);
-        System.exit(1);
     }
     public void promptHeroName(){
         this.Input.nextLine();
@@ -136,7 +135,6 @@ public class PlayGame {
                 System.err.println("Invalid Entry....");
                 promptHeroType();
         }
-        utils.printAsterix(75);
     }
     private void setHeroType(String heroType) {
         this.heroType = heroType;
@@ -154,6 +152,18 @@ public class PlayGame {
         this.att = attack;
         this.def = defence;
         this.hp = hitpoints;
+    }
+
+    private void printStats(){
+        System.out.println("Player     : "+this.playerName
+                        +"\nHeroName   : "+this.heroName
+                        +"\nHero Class : "+this.heroType
+                        +"\nXP         : "+this.exp
+                        +"\nLevel      : "+this.herolevel
+                        +"\nAttack     : "+this.att
+                        +"\nDefence    : "+this.def
+                        +"\nHit Points : "+this.hp);
+        utils.printAsterix(75);
     }
 
     private void printMap(int level, String Player){
