@@ -41,6 +41,7 @@ public class PlayGame {
         printHeroOpt();
         printStats();
         printMap(this.herolevel,"");
+        heroMove();
     }
 
 //    Header
@@ -184,8 +185,6 @@ public class PlayGame {
     }
 
     private void populateBoard(int boardSize){
-
-
         setCoordinates(boardSize/2,boardSize/2);
         board = new String[boardSize][boardSize];
         for(int row = 0;row  < boardSize; row++) {
@@ -194,11 +193,8 @@ public class PlayGame {
             }
         }
     }
+
     private void printMap(int level, String Player){
-        int column;      // column Axis
-        int row;      // row Axis
-        String player;
-        String Velian;
         int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
         populateBoard(boardSize);
 
@@ -206,7 +202,8 @@ public class PlayGame {
             board[3][3] = "\033[31mV\033[0m";
 
 //        Prints Map
-        for(row = 0;row  < boardSize; row++){
+        for(int row = 0;row  < boardSize; row++){
+            int column;
             for (column = 0; column < boardSize ; column++) {
                 if (board[row][column] == null)
                 {
@@ -222,6 +219,80 @@ public class PlayGame {
             System.out.print("\n");
         }
         System.out.print("\n");
-        System.exit(0);
+        utils.printAsterix(75);
     }
+
+    private void printmove(int level, String Player, int previous_x, int previous_y){
+        int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
+
+        System.out.println(previous_x + " is board "+boardSize/2);
+        board[previous_x][previous_y] = null;
+        board[heroX][heroY] ="\033[0;33mH\033[0m";
+        board[3][3] = "\033[31mV\033[0m";
+
+//        Prints Map
+        for(int row = 0;row  < boardSize; row++){
+            int column;
+            for (column = 0; column < boardSize ; column++) {
+                if (board[row][column] == null)
+                {
+                    System.out.print("| . ");
+                }
+                else {
+                    System.out.print("| "+ board[row][column]  + " ");
+                }
+            }
+            if (column == boardSize) {
+                System.out.print("|");
+            }
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+        utils.printAsterix(75);
+    }
+
+    private void heroMove(){
+        Input.nextLine();
+        System.out.println("Please Make a Move\n" +
+                "1. Move North\n" +
+                "2. Move East\n" +
+                "3. Move South\n"+
+                "4. Move West");
+        int _heroMove = Input.nextInt();
+        switch (_heroMove){
+            case 1:
+                moveNorth(heroX,heroY);
+                break;
+            case 2:
+                moveEast(heroX,heroY);
+                break;
+            case 3:
+                moveSouth(heroX,heroY);
+                break;
+            case 4:
+                moveWest(heroX,heroY);
+                break;
+            default:
+                System.err.println("Invalid Entry....");
+                heroMove();
+        }
+        utils.printAsterix(75);
+    }
+
+    private void moveNorth(int co_x, int co_y){
+        setHeroX(heroX - 1);
+        printmove(herolevel,"",heroX + 1,heroY);
+        System.exit(1);
+
+    }
+    private void moveEast(int co_x, int co_y){
+
+    }
+    private void moveSouth(int co_x, int co_y){
+
+    }
+    private void moveWest(int co_x, int co_y){
+
+    }
+
 }
