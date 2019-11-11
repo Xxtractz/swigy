@@ -14,6 +14,8 @@ public class PlayGame {
     private int att;
     private int def;
     private int hp;
+    private int heroX;
+    private int heroY;
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -166,12 +168,26 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
+
+    private void setHeroX(int heroX) {
+        this.heroX = heroX;
+    }
+
+    public void setHeroY(int heroY) {
+        this.heroY = heroY;
+    }
+
+    private void setCoordinates(int x, int y){
+        setHeroX(x);
+        setHeroY(y);
+    }
+
     private void printMap(int level, String Player){
         int column;      // column Axis
         int row;      // row Axis
 
         int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
-        int center = boardSize/2;
+        setCoordinates(boardSize/2,boardSize/2);
         String player;
         String Velian;
 
@@ -181,7 +197,7 @@ public class PlayGame {
                     board[row][column] = null;
                 }
             }
-        board[center][center] ="\033[0;33mH\033[0m";
+        board[heroX][heroY] ="\033[0;33mH\033[0m";
             board[3][3] = "\033[31mV\033[0m";
 
 //        Prints Map
@@ -189,10 +205,6 @@ public class PlayGame {
             for (column = 0; column < boardSize ; column++) {
                 if (board[row][column] == null)
                 {
-//                    assert board[row][column] != null;
-//                    board[row][column].remove("null");
-//                    board[row][column].add(".");
-//                    System.out.print("| "+ board[row][column]  + " ");
                     System.out.print("| . ");
                 }
                 else {
