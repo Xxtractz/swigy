@@ -16,6 +16,8 @@ public class PlayGame {
     private int hp;
     private int heroX;
     private int heroY;
+    private int min_board_pos;
+    private int max_board_pos;
     String[][] board;
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
@@ -193,10 +195,23 @@ public class PlayGame {
             }
         }
     }
+    private void setBoard_pos(int min, int max){
+        setMin_board_pos(min);
+        setMax_board_pos(max);
+    }
+
+    public void setMax_board_pos(int max_board_pos) {
+        this.max_board_pos = max_board_pos;
+    }
+
+    private void setMin_board_pos(int min_board_pos) {
+        this.min_board_pos = min_board_pos;
+    }
 
     private void printMap(int level, String Player){
         int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
         populateBoard(boardSize);
+        setBoard_pos(0,boardSize);
 
         board[heroX][heroY] ="\033[0;33mH\033[0m";
             board[3][3] = "\033[31mV\033[0m";
@@ -222,18 +237,19 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
-    private void printmove(int level, String Player, int previous_x, int previous_y){
-        int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
+    private void printmove(int level, int previous_x, int previous_y){
+        setMax_board_pos((int) ((level -1) * 5 + 10 - (level*0.02)));
 
-        System.out.println(previous_x + " is board "+boardSize/2);
+
         board[previous_x][previous_y] = null;
-        board[heroX][heroY] ="\033[0;33mH\033[0m";
+        board[heroX][heroY] ="\033[0;33mH" +
+                "\033[0m";
         board[3][3] = "\033[31mV\033[0m";
 
 //        Prints Map
-        for(int row = 0;row  < boardSize; row++){
+        for(int row = 0;row  < max_board_pos; row++){
             int column;
-            for (column = 0; column < boardSize ; column++) {
+            for (column = 0; column < max_board_pos ; column++) {
                 if (board[row][column] == null)
                 {
                     System.out.print("| . ");
@@ -242,7 +258,7 @@ public class PlayGame {
                     System.out.print("| "+ board[row][column]  + " ");
                 }
             }
-            if (column == boardSize) {
+            if (column == max_board_pos) {
                 System.out.print("|");
             }
             System.out.print("\n");
@@ -259,40 +275,46 @@ public class PlayGame {
                 "3. Move South\n"+
                 "4. Move West");
         int _heroMove = Input.nextInt();
-        switch (_heroMove){
+        utils.printAsterix(75);
+        switch (_heroMove) {
             case 1:
-                moveNorth(heroX,heroY);
+                System.err.println("Moving North (up)");
+                moveNorth(heroX, heroY);
                 break;
             case 2:
-                moveEast(heroX,heroY);
+                System.err.println("Moving East (right)");
+                moveEast(heroX, heroY);
                 break;
             case 3:
-                moveSouth(heroX,heroY);
+                System.err.println("Moving South (down)");
+                moveSouth(heroX, heroY);
                 break;
             case 4:
-                moveWest(heroX,heroY);
+                System.err.println("Moving West (left)");
+                moveWest(heroX, heroY);
                 break;
             default:
                 System.err.println("Invalid Entry....");
                 heroMove();
         }
-        utils.printAsterix(75);
+        heroMove();
     }
 
     private void moveNorth(int co_x, int co_y){
         setHeroX(heroX - 1);
-        printmove(herolevel,"",heroX + 1,heroY);
-        System.exit(1);
-
+        printmove(herolevel,heroX + 1,heroY);
     }
     private void moveEast(int co_x, int co_y){
-
+        setHeroY(heroY + 1);
+        printmove(herolevel,heroX ,heroY-1);
     }
     private void moveSouth(int co_x, int co_y){
-
+        setHeroX(heroX + 1);
+        printmove(herolevel,heroX - 1,heroY);
     }
     private void moveWest(int co_x, int co_y){
-
+        setHeroY(heroY - 1);
+        printmove(herolevel,heroX ,heroY+1);
     }
 
 }
