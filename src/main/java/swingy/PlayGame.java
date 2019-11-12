@@ -279,19 +279,19 @@ public class PlayGame {
         switch (_heroMove) {
             case 1:
                 System.err.println("Moving North (up)");
-                moveNorth(heroX, heroY);
+                moveNorth();
                 break;
             case 2:
                 System.err.println("Moving East (right)");
-                moveEast(heroX, heroY);
+                moveEast();
                 break;
             case 3:
                 System.err.println("Moving South (down)");
-                moveSouth(heroX, heroY);
+                moveSouth();
                 break;
             case 4:
                 System.err.println("Moving West (left)");
-                moveWest(heroX, heroY);
+                moveWest();
                 break;
             default:
                 System.err.println("Invalid Entry....");
@@ -300,21 +300,35 @@ public class PlayGame {
         heroMove();
     }
 
-    private void moveNorth(int co_x, int co_y){
-        setHeroX(heroX - 1);
-        printmove(herolevel,heroX + 1,heroY);
+
+    private void moveNorth(){
+        if ((heroX -1) > min_board_pos || (heroX -1)< max_board_pos){
+            setHeroX(heroX - 1);
+            printmove(herolevel,heroX + 1,heroY);
+        }
+        winGame();
     }
-    private void moveEast(int co_x, int co_y){
-        setHeroY(heroY + 1);
-        printmove(herolevel,heroX ,heroY-1);
+    private void moveEast(){
+        if ((heroY + 1) > min_board_pos || (heroY +1) < max_board_pos){
+            setHeroY(heroY + 1);
+            printmove(herolevel,heroX ,heroY-1);
+        }
+        winGame();
     }
-    private void moveSouth(int co_x, int co_y){
+    private void moveSouth(){
+        if ((heroX + 1) > min_board_pos || (heroX + 1 )< max_board_pos){
         setHeroX(heroX + 1);
-        printmove(herolevel,heroX - 1,heroY);
+        printmove(herolevel,heroX - 1,heroY);}
+        winGame();
     }
-    private void moveWest(int co_x, int co_y){
+    private void moveWest(){
+        if ((heroY -1) > min_board_pos || (heroY -1)< max_board_pos){
         setHeroY(heroY - 1);
-        printmove(herolevel,heroX ,heroY+1);
+        printmove(herolevel,heroX ,heroY+1);}
+        winGame();
     }
 
+    private void winGame(){
+
+    }
 }
