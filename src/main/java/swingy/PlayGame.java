@@ -300,8 +300,8 @@ public class PlayGame {
             winGame();
         }
         System.err.println("Moving North (up)");
-        System.out.println("*******************************" +
-                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(25);
+        System.out.println("Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
         utils.printAsterix(50);
         if ((heroX -1) > min_board_pos || (heroX -1)< max_board_pos){
             setHeroX(heroX - 1);
@@ -313,8 +313,8 @@ public class PlayGame {
             winGame();
         }
         System.err.println("Moving East (right)");
-        System.out.println("*******************************" +
-                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(25);
+        System.out.println("Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
         utils.printAsterix(50);
         if ((heroY + 1) > min_board_pos || (heroY +1) < max_board_pos){
             setHeroY(heroY + 1);
@@ -326,8 +326,8 @@ public class PlayGame {
             winGame();
         }
         System.err.println("Moving South (down)");
-        System.out.println("*******************************" +
-                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(25);
+        System.out.println("Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
         utils.printAsterix(50);
         if ((heroX + 1) > min_board_pos || (heroX + 1 )< max_board_pos){
             setHeroX(heroX + 1);
@@ -339,8 +339,8 @@ public class PlayGame {
             winGame();
         }
         System.err.println("Moving West (left)");
-        System.out.println("*******************************" +
-                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(25);
+        System.out.println("Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
         utils.printAsterix(50);
         if ((heroY -1) > min_board_pos || (heroY -1)< max_board_pos){
             setHeroY(heroY - 1);
