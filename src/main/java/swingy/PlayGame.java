@@ -220,13 +220,23 @@ public class PlayGame {
                 {"T", "Thanos", "400", "390", "600"}};
     }
 
+    private void addVillian(){
+        int row = new Random().nextInt(max_board_pos);
+        int col = new Random().nextInt(max_board_pos);
+        if(herolevel == 1 &&  row != (max_board_pos/2) && col != (max_board_pos/2)){
+            board[row][col] = "\033[31m"+villians[2][0]+"\033[0m";
+        }else
+            addVillian();
+    }
     private void printMap(int level, String Player){
         int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
         populateBoard(boardSize);
         setBoard_pos(0,boardSize);
+        setVillians();
+        addVillian();
 
         board[heroX][heroY] ="\033[0;33mH\033[0m";
-            board[3][3] = "\033[31mV\033[0m";
+//            board[3][3] = "\033[31m"+villians[2][0]+"\033[0m";
 
 //        Prints Map
         for(int row = 0;row  < boardSize; row++){
@@ -250,12 +260,14 @@ public class PlayGame {
     }
 
     private void printmove(int level, int previous_x, int previous_y){
+        int fightopt = 0;
         setMax_board_pos((int) ((level -1) * 5 + 10 - (level*0.02)));
 
         board[previous_x][previous_y] = null;
-        board[heroX][heroY] ="\033[0;33mH" +
-                "\033[0m";
-        board[3][3] = "\033[31mV\033[0m";
+        if (isVillian(board[heroX][heroY])){
+            fightopt = 1;
+        }
+        board[heroX][heroY] ="\033[0;33mH\033[0m";
 
 //        Prints Map
         for(int row = 0;row  < max_board_pos; row++){
@@ -276,6 +288,11 @@ public class PlayGame {
         }
         System.out.print("\n");
         utils.printAsterix(75);
+
+        if (fightopt == 1){
+            System.out.println("OOPS Looks like You stepped into the enemies Territory");
+            System.exit(0);
+        }
     }
 
     private void printEndGameHeader(){
@@ -405,6 +422,25 @@ public class PlayGame {
     @Contract(pure = true)
     private double requiredLevel(int level){
         return ( level*1000+ Math.pow((level - 1), 2)*450);
+    }
+
+    private boolean isVillian(String s){
+        if (s == this.villians[0][0]
+                || s == this.villians[1][0]
+                || s == this.villians[2][0]
+                || s == this.villians[3][0]){
+            return true;
+        }
+        return false;
+
+    }
+
+    private void isthereVillian(){
+
+    }
+
+    private void fightVillian(){
+
     }
 
     private boolean canAdvcance(){
