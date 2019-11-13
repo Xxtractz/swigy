@@ -237,7 +237,6 @@ public class PlayGame {
     private void printmove(int level, int previous_x, int previous_y){
         setMax_board_pos((int) ((level -1) * 5 + 10 - (level*0.02)));
 
-
         board[previous_x][previous_y] = null;
         board[heroX][heroY] ="\033[0;33mH" +
                 "\033[0m";
@@ -297,36 +296,43 @@ public class PlayGame {
     private void beforeMove(String direction){
         System.err.println(direction);
         utils.printAsterix(50);
-        System.out.println("Level : "+utils.textBlueInt(this.herolevel )+ "\t\t XP : "+utils.textBlueInt(this.exp) + "\t\t HP: "+utils.textBlueInt(this.hp));
+        System.out.println("Level : "+utils.textBlueInt(this.herolevel )+ "\t\t XP : "+utils.textBlueInt(this.exp + 10) + "\t\t HP: "+utils.textBlueInt(this.hp));
         utils.printAsterix(50);
     }
+
     private void moveNorth(){
         if (heroX == min_board_pos){
             winGame();
         }
+//        System.out.println("HERO X == "+heroX +" \t\t Min ==" +min_board_pos);
         beforeMove("Moving North (up)");
         if ((heroX -1) > min_board_pos || (heroX -1)< max_board_pos){
             setHeroX(heroX - 1);
+            updateExp(10);
             printmove(herolevel,heroX + 1,heroY);
         }
     }
     private void moveEast(){
-        if ((heroY ) == max_board_pos){
+        if (heroY+1  == max_board_pos){
             winGame();
         }
+//        System.out.println("HERO Y == "+heroY +" \t\t Max ==" +max_board_pos);;
         beforeMove("Moving East (right)");
         if ((heroY + 1) > min_board_pos || (heroY +1) < max_board_pos){
             setHeroY(heroY + 1);
+            updateExp(10);
             printmove(herolevel,heroX ,heroY-1);
         }
     }
     private void moveSouth(){
-        if ((heroX) == max_board_pos){
+        if ((heroX +1) == max_board_pos){
             winGame();
         }
+        System.out.println("HERO X == "+heroX +" \t\t Min ==" +max_board_pos);
         beforeMove("Moving South (down)");
         if ((heroX + 1) > min_board_pos || (heroX + 1 )< max_board_pos){
             setHeroX(heroX + 1);
+            updateExp(10);
             printmove(herolevel,heroX - 1,heroY);
         }
     }
@@ -337,14 +343,26 @@ public class PlayGame {
         beforeMove("Moving West (left)");
         if ((heroY -1) > min_board_pos || (heroY -1)< max_board_pos){
             setHeroY(heroY - 1);
+            updateExp(10);
             printmove(herolevel,heroX ,heroY+1);
         }
     }
 
-    private void winGame(){
+    private void updateHp(int hp){
+
+    }
+
+    private void updateExp(int exp){
+        this.exp += exp;
+    }
+
+    private void printWinHeader(){
         utils.printAsterix(75);
         System.out.println("\t\t\t\t\t\033[1;34mCongratulation\033[0m \033[0;33m"+playerName+"\033[0m    \n\t\t\t\t\t\t\033[1;34mYou Have Won\033[0m");
         utils.printAsterix(75);
+    }
+    private void winGame(){
+        printWinHeader();
         Input.nextLine();
         System.exit(1);
     }
