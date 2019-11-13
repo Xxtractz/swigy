@@ -1,6 +1,9 @@
 package swingy;
 
+import org.jetbrains.annotations.Contract;
 import swingy.utils_swingy.SwingyUtils;
+
+import javax.swing.*;
 import java.util.*;
 
 import static java.lang.Integer.*;
@@ -17,7 +20,8 @@ public class PlayGame {
     private int heroY;
     private int min_board_pos;
     private int max_board_pos;
-    String[][] board;
+    String [][] board;
+    String[][] villians;
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -38,6 +42,9 @@ public class PlayGame {
     private void Start(){
         getUser();
         printHeroOpt();
+        playGame();
+    }
+    private void playGame(){
         printStats();
         printMap(this.herolevel,"");
         heroMove();
@@ -205,6 +212,14 @@ public class PlayGame {
         this.min_board_pos = min_board_pos;
     }
 
+    private void setVillians(){
+        villians = new String[][]{
+                {"E", "Erik Killmonger", "80", "95", "170"},
+                {"L", "Loki", "50", "50", "210"},
+                {"G", "Ghost", "60", "50", "106"},
+                {"T", "Thanos", "400", "390", "600"}};
+    }
+
     private void printMap(int level, String Player){
         int boardSize = (int) ((level -1) * 5 + 10 - (level*0.02));
         populateBoard(boardSize);
@@ -263,16 +278,41 @@ public class PlayGame {
         utils.printAsterix(75);
     }
 
+    private void printEndGameHeader(){
+        utils.printAsterix(135);
+        utils.printAsterix(135);
+        System.out.println( utils.textBlue("                                                                                                                                           " +
+                            "\n    ::::::::::           :::::        ::::::      ::::::  ::::::::           ::::::::    ::            :: :::::::  :::::          " +
+                            "\n  :::        :::        ::   ::       :::  ::    ::  :::  :::               ::      ::    ::          ::  :::      ::   ::     " +
+                            "\n :::                   ::     ::      :::   ::  ::   :::  ::               ::        ::    ::        ::   ::       ::    ::   " +
+                            "\n :::         :::::    :::::::::::     :::     :::    :::  ::::::::        ::          ::    ::      ::    :::::::  ::   ::              " +
+                            "\n :::          :::    ::         ::    :::            :::  ::               ::        ::      ::    ::     ::       :: :::         " +
+                            "\n  :::        :::    ::           ::   :::            :::  :::               ::      ::        ::  ::      :::      ::   ::                 " +
+                            "\n    ::::::::::     ::             ::  :::            :::  ::::::::            :::::::          ::::       :::::::  ::    ::                                         " +
+                            "\n                                                                                                                                        "));
+        utils.printAsterix(135);
+        utils.printAsterix(135);
+    }
+
+    private void endGame(){
+        printEndGameHeader();
+        System.exit(0);
+    }
+
     private void heroMove(){
         Input.nextLine();
         System.out.println("Please Make a Move\n" +
                 "1. Move North\n" +
                 "2. Move East\n" +
                 "3. Move South\n"+
-                "4. Move West");
+                "4. Move West\n" +
+                utils.textRed("********Enter 0 to Exit*********"));
         int _heroMove = Input.nextInt();
         utils.printAsterix(75);
         switch (_heroMove) {
+            case 0:
+                endGame();
+                break;
             case 1:
                 moveNorth();
                 break;
@@ -313,7 +353,7 @@ public class PlayGame {
         }
     }
     private void moveEast(){
-        if (heroY+1  == max_board_pos){
+        if (heroY + 1  == max_board_pos){
             winGame();
         }
 //        System.out.println("HERO Y == "+heroY +" \t\t Max ==" +max_board_pos);;
@@ -325,7 +365,7 @@ public class PlayGame {
         }
     }
     private void moveSouth(){
-        if ((heroX +1) == max_board_pos){
+        if ((heroX + 1) == max_board_pos){
             winGame();
         }
         System.out.println("HERO X == "+heroX +" \t\t Min ==" +max_board_pos);
@@ -341,7 +381,7 @@ public class PlayGame {
             winGame();
         }
         beforeMove("Moving West (left)");
-        if ((heroY -1) > min_board_pos || (heroY -1)< max_board_pos){
+        if ((heroY - 1) > min_board_pos || (heroY -1)< max_board_pos){
             setHeroY(heroY - 1);
             updateExp(10);
             printmove(herolevel,heroX ,heroY+1);
@@ -358,12 +398,45 @@ public class PlayGame {
 
     private void printWinHeader(){
         utils.printAsterix(75);
-        System.out.println("\t\t\t\t\t\033[1;34mCongratulation\033[0m \033[0;33m"+playerName+"\033[0m    \n\t\t\t\t\t\t\033[1;34mYou Have Won\033[0m");
+        System.out.println("\t\t\t\t\t\033[1;34mCongratulation\033[0m \033[0;33m"+playerName+"\033[0m    \n\t\t\t\t\t\033[1;34mYou Have Completed Level\033[0m \033[0;33m"+herolevel+"\033[0m ");
         utils.printAsterix(75);
     }
+
+    @Contract(pure = true)
+    private double requiredLevel(int level){
+        return ( level*1000+ Math.pow((level - 1), 2)*450);
+    }
+
+    private boolean canAdvcance(){
+        if (exp > requiredLevel(herolevel)){
+            setHerolevel(herolevel+1);
+            return true;
+        }
+        return false;
+    }
+
+    @Contract(pure = true)
+    private boolean defeatedVillian(){
+        for (int i = 0; i < max_board_pos; i++) {
+            for (int j = 0; j < max_board_pos; j++) {
+                if(board[i][j] == "V"){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private void winGame(){
         printWinHeader();
-        Input.nextLine();
+        if (canAdvcance() && defeatedVillian()){
+            System.out.println("\033[2;34mLeveled Up\033[0m");
+        }else {
+            System.out.println("\033[2;34mLooks Like You Haven't defeated The Villian\nYou need to defeat Villian to advance to the next Level\033[0m");
+            utils.printAsterix(75);
+        }
+
+        playGame();
         System.exit(1);
     }
 }
