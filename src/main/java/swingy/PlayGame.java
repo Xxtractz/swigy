@@ -6,7 +6,6 @@ import java.util.*;
 import static java.lang.Integer.*;
 
 public class PlayGame {
-    int size;   // row and column Axis
     private String heroName;
     private String heroType;
     private int herolevel;
@@ -22,8 +21,6 @@ public class PlayGame {
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
     String playerName = "";
-
-    ArrayList<String> playerAttr = new ArrayList<String>( );
 
     public static void main(String[] args) {
 //        final GameController console = new GameController("console");
@@ -278,19 +275,16 @@ public class PlayGame {
         utils.printAsterix(75);
         switch (_heroMove) {
             case 1:
-                System.err.println("Moving North (up)");
                 moveNorth();
                 break;
             case 2:
-                System.err.println("Moving East (right)");
                 moveEast();
                 break;
             case 3:
-                System.err.println("Moving South (down)");
                 moveSouth();
                 break;
             case 4:
-                System.err.println("Moving West (left)");
+
                 moveWest();
                 break;
             default:
@@ -302,33 +296,63 @@ public class PlayGame {
 
 
     private void moveNorth(){
+        if (heroX == min_board_pos){
+            winGame();
+        }
+        System.err.println("Moving North (up)");
+        System.out.println("*******************************" +
+                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(50);
         if ((heroX -1) > min_board_pos || (heroX -1)< max_board_pos){
             setHeroX(heroX - 1);
             printmove(herolevel,heroX + 1,heroY);
         }
-        winGame();
     }
     private void moveEast(){
+        if ((heroY ) == max_board_pos){
+            winGame();
+        }
+        System.err.println("Moving East (right)");
+        System.out.println("*******************************" +
+                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(50);
         if ((heroY + 1) > min_board_pos || (heroY +1) < max_board_pos){
             setHeroY(heroY + 1);
             printmove(herolevel,heroX ,heroY-1);
         }
-        winGame();
     }
     private void moveSouth(){
+        if ((heroX) == max_board_pos){
+            winGame();
+        }
+        System.err.println("Moving South (down)");
+        System.out.println("*******************************" +
+                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(50);
         if ((heroX + 1) > min_board_pos || (heroX + 1 )< max_board_pos){
-        setHeroX(heroX + 1);
-        printmove(herolevel,heroX - 1,heroY);}
-        winGame();
+            setHeroX(heroX + 1);
+            printmove(herolevel,heroX - 1,heroY);
+        }
     }
     private void moveWest(){
+        if ((heroY ) == min_board_pos){
+            winGame();
+        }
+        System.err.println("Moving West (left)");
+        System.out.println("*******************************" +
+                "Level : "+this.herolevel + "\t\t XP : "+this.exp + "\t\t HP: "+this.hp);
+        utils.printAsterix(50);
         if ((heroY -1) > min_board_pos || (heroY -1)< max_board_pos){
-        setHeroY(heroY - 1);
-        printmove(herolevel,heroX ,heroY+1);}
-        winGame();
+            setHeroY(heroY - 1);
+            printmove(herolevel,heroX ,heroY+1);
+        }
     }
 
     private void winGame(){
-
+        utils.printAsterix(75);
+        System.out.println("\t\t\t\t\t\033[1;34mCongratulation\033[0m \033[0;33m"+playerName+"\033[0m    \n\t\t\t\t\t\t\033[1;34mYou Have Won\033[0m");
+        utils.printAsterix(75);
+        Input.nextLine();
+        System.exit(1);
     }
 }
