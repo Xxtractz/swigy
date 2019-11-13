@@ -22,6 +22,7 @@ public class PlayGame {
     private int max_board_pos;
     String [][] board;
     String[][] villians;
+    int [] v_pos;
     private SwingyUtils utils = new SwingyUtils();
     private Scanner Input = new Scanner(System.in);
     String playerName = "";
@@ -221,10 +222,11 @@ public class PlayGame {
     }
 
     private void addVillian(){
-        int row = new Random().nextInt(max_board_pos);
-        int col = new Random().nextInt(max_board_pos);
-        if(herolevel == 1 &&  row != (max_board_pos/2) && col != (max_board_pos/2)){
-            board[row][col] = "\033[31m"+villians[2][0]+"\033[0m";
+        v_pos = new int[3];
+        v_pos[0] = new Random().nextInt(max_board_pos);
+        v_pos[1] = new Random().nextInt(max_board_pos);
+        if(herolevel == 1 &&  v_pos[0] != (max_board_pos/2) && v_pos[1] != (max_board_pos/2)){
+            board[v_pos[0]][v_pos[1]] = "\033[31m"+villians[2][0]+"\033[0m";
         }else
             addVillian();
     }
@@ -260,12 +262,12 @@ public class PlayGame {
     }
 
     private void printmove(int level, int previous_x, int previous_y){
-        int fightopt = 0;
         setMax_board_pos((int) ((level -1) * 5 + 10 - (level*0.02)));
 
         board[previous_x][previous_y] = null;
-        if (isVillian(board[heroX][heroY])){
-            fightopt = 1;
+        if(heroX == v_pos[0] && heroY == v_pos[1]){
+            System.out.println("OOPS Looks like You stepped into the enemies Territory");
+            System.exit(0);
         }
         board[heroX][heroY] ="\033[0;33mH\033[0m";
 
@@ -288,11 +290,6 @@ public class PlayGame {
         }
         System.out.print("\n");
         utils.printAsterix(75);
-
-        if (fightopt == 1){
-            System.out.println("OOPS Looks like You stepped into the enemies Territory");
-            System.exit(0);
-        }
     }
 
     private void printEndGameHeader(){
@@ -425,10 +422,8 @@ public class PlayGame {
     }
 
     private boolean isVillian(String s){
-        if (s == this.villians[0][0]
-                || s == this.villians[1][0]
-                || s == this.villians[2][0]
-                || s == this.villians[3][0]){
+        System.err.println(s);
+        if (s.equals("G") || s.equals("T") || s.equals("L") || s.equals("E")){
             return true;
         }
         return false;
