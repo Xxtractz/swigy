@@ -273,8 +273,6 @@ public class PlayGame {
             if (board[v_pos[0]][v_pos[1]].equals(utils.textRed("G"))){
                 fightVillian("G");
             }
-            System.out.println("OOPS Looks like You stepped into the enemies Territory");
-            System.exit(0);
         }
         board[heroX][heroY] ="\033[0;33mH\033[0m";
 
@@ -398,6 +396,7 @@ public class PlayGame {
 
     }
 
+
     private void updateExp(int exp){
         this.exp += exp;
     }
@@ -420,9 +419,9 @@ public class PlayGame {
     private void displayVillianAttribute(String _v_Name, String _v_Att,String _v_Def, String _v_Hp){
         System.out.println("Get Ready to Fight\n" +
                 "You are about to Fight -> "+utils.textBlue(_v_Name)+
-                "\n Attack              -> "+utils.textBlue(_v_Att)+
-                "\n Defence             -> "+utils.textBlue(_v_Def)+
-                "\n Hit Points          -> "+utils.textBlue(_v_Hp));
+                "\n Attack              -> "+utils.textBlue(_v_Att)+ "Your Attack ->"+utils.textBlueInt(this.att)+
+                "\n Defence             -> "+utils.textBlue(_v_Def)+ "Your Defence  ->"+utils.textBlueInt(this.att)+
+                "\n Hit Points          -> "+utils.textBlue(_v_Hp) +"Your Hit Points ->"+utils.textBlueInt(this.att));
     }
 
 
@@ -445,9 +444,18 @@ public class PlayGame {
             else {
                 utils.printAsterix(35);
                 updateExp(980);
+                leveledUp();
                 System.out.println("Hero Wins");
                 utils.printAsterix(35);
             }
+        }
+    }
+
+    private void leveledUp(){
+        if (this.exp > requiredLevel(this.herolevel))
+        {
+            herolevel += 1;
+            winGame();
         }
     }
 
