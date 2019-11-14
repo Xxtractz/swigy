@@ -222,11 +222,21 @@ public class PlayGame {
     }
 
     private void addVillian(){
-        v_pos = new int[3];
+        v_pos = new int[8];
         v_pos[0] = new Random().nextInt(max_board_pos);
+        v_pos[2] = new Random().nextInt(max_board_pos);
         v_pos[1] = new Random().nextInt(max_board_pos);
-        if(herolevel == 1 &&  v_pos[0] != (max_board_pos/2) && v_pos[1] != (max_board_pos/2)){
-            board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]) ;
+        v_pos[3] = new Random().nextInt(max_board_pos);
+        v_pos[4] = new Random().nextInt(max_board_pos);
+        v_pos[5] = new Random().nextInt(max_board_pos);
+        if(v_pos[0] != (max_board_pos/2) && v_pos[1] != (max_board_pos/2)){
+            if (herolevel == 1){
+                board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]) ;
+            }else{
+                board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]) ;
+                board[v_pos[2]][v_pos[3]] = utils.textRed(villians[2][0]) ;
+                board[v_pos[4]][v_pos[5]] = utils.textRed(villians[2][0]) ;
+            }
         }else
             addVillian();
     }
