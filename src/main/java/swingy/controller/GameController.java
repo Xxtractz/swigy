@@ -1,12 +1,19 @@
 package swingy.controller;
-import swingy.view.IDisplay;
-import swingy.view.Console;
+import swingy.view.*;
 
 public class GameController {
-    private IDisplay display = new Console();
+    private IDisplay display;
 
     public GameController(String view){
         if(view.equals("console")){
+            display  = new Console();
+            display.initGame();
+//            while (true){
+//                prompt();
+//            }
+        }
+        if(view.equals("gui".toUpperCase())){
+             display = new GUI();
             display.initGame();
 //            while (true){
 //                prompt();
