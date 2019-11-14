@@ -1,32 +1,28 @@
 package swingy.controller;
-import org.jetbrains.annotations.NotNull;
 import swingy.view.IDisplay;
-import swingy.view.console.Console;
-
-import java.util.Scanner;
+import swingy.view.Console;
 
 public class GameController {
-    private IDisplay display;
+    private IDisplay display = new Console();
 
-    public GameController(@NotNull String view){
+    public GameController(String view){
         if(view.equals("console")){
-            display = new Console();
             display.initGame();
-            while (true){
-                prompt();
-            }
+//            while (true){
+//                prompt();
+//            }
         }
     }
 
-    private void prompt(){
-        Scanner input = new Scanner(System.in);
-        String command = input.nextLine();
-
-        System.out.println("Here is my command \t"+command);
-        executeCommand(command);
-    }
-
-    private void executeCommand(String x){
-
-    }
+//    private void prompt(){
+//        Scanner input = new Scanner(System.in);
+//        String command = input.nextLine();
+//
+//        System.out.println("Here is my command \t"+command);
+//        executeCommand(command);
+//    }
+//
+//    private void executeCommand(String x){
+//
+//    }
 }
