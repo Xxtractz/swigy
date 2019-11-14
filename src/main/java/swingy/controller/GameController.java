@@ -1,29 +1,33 @@
 package swingy.controller;
 import org.jetbrains.annotations.NotNull;
-import swingy.model.GameData;
 import swingy.view.*;
 
 public class GameController {
     private IDisplay display;
-    private GameData gameData = new GameData();
 
     public GameController(@NotNull String view){
         if(view.equals("console".toUpperCase())){
             display  = new Console();
             display.initGame();
-//            while (true){
-//                prompt();
-//            }
+
         }
-        if(view.equals("gui".toUpperCase())){
-             display = new GUI();
+        if(view.equals("gui".toUpperCase())) {
+            display = new GUI();
             display.initGame();
-//            while (true){
-//                prompt();
-//            }
+        }
+
+        while (true) {
+            try {
+                run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    private void run(){
+        display.getUser();
+    }
 //    private void prompt(){
 //        Scanner input = new Scanner(System.in);
 //        String command = input.nextLine();

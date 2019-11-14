@@ -5,9 +5,13 @@ import swingy.utils_swingy.SwingyUtils;
 import javax.swing.*;
 
 public class GUI implements IDisplay {
-    GameData gameData = new GameData();
-    SwingyUtils utils = new SwingyUtils();
+    private GameData gameData;
+    private SwingyUtils utils;
 
+    public GUI(){
+        gameData = new GameData();
+        utils = new SwingyUtils();
+    }
     @Override
     public void initGame() {
 
@@ -19,5 +23,10 @@ public class GUI implements IDisplay {
 //        header.setSize(800,800);
 //        header.setLayout(null);
 //        header.setVisible(true);
+    }
+
+    @Override
+    public void getUser() {
+
     }
 }
