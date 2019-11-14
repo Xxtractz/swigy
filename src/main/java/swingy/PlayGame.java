@@ -226,7 +226,7 @@ public class PlayGame {
         v_pos[0] = new Random().nextInt(max_board_pos);
         v_pos[1] = new Random().nextInt(max_board_pos);
         if(herolevel == 1 &&  v_pos[0] != (max_board_pos/2) && v_pos[1] != (max_board_pos/2)){
-            board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]);
+            board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]) ;
         }else
             addVillian();
     }
@@ -241,6 +241,12 @@ public class PlayGame {
 //            board[3][3] = "\033[31m"+villians[2][0]+"\033[0m";
 
 //        Prints Map
+        printBoard(boardSize);
+        System.out.print("\n");
+        utils.printAsterix(75);
+    }
+
+    private void printBoard(int boardSize){
         for(int row = 0;row  < boardSize; row++){
             int column;
             for (column = 0; column < boardSize ; column++) {
@@ -257,8 +263,6 @@ public class PlayGame {
             }
             System.out.print("\n");
         }
-        System.out.print("\n");
-        utils.printAsterix(75);
     }
 
     private void printmove(int level, int previous_x, int previous_y){
@@ -266,12 +270,7 @@ public class PlayGame {
 
         board[previous_x][previous_y] = null;
         if(heroX == v_pos[0] && heroY == v_pos[1]){
-            String Curr_villian = board[v_pos[0]][v_pos[1]];
-
-            System.out.println(Curr_villian);
-
-
-            if (Curr_villian.equals(utils.textRed("G"))){
+            if (board[v_pos[0]][v_pos[1]].equals(utils.textRed("G"))){
                 fightVillian("G");
             }
             System.out.println("OOPS Looks like You stepped into the enemies Territory");
@@ -280,22 +279,7 @@ public class PlayGame {
         board[heroX][heroY] ="\033[0;33mH\033[0m";
 
 //        Prints Map
-        for(int row = 0;row  < max_board_pos; row++){
-            int column;
-            for (column = 0; column < max_board_pos ; column++) {
-                if (board[row][column] == null)
-                {
-                    System.out.print("| . ");
-                }
-                else {
-                    System.out.print("| "+ board[row][column]  + " ");
-                }
-            }
-            if (column == max_board_pos) {
-                System.out.print("|");
-            }
-            System.out.print("\n");
-        }
+        printBoard(max_board_pos);
         System.out.print("\n");
         utils.printAsterix(75);
     }
@@ -433,13 +417,37 @@ public class PlayGame {
 
     }
 
+    private void displayVillianAttribute(String _v_Name, String _v_Att,String _v_Def, String _v_Hp){
+        System.out.println("Get Ready to Fight\n" +
+                "You are about to Fight -> "+utils.textBlue(_v_Name)+
+                "\n Attack              -> "+utils.textBlue(_v_Att)+
+                "\n Defence             -> "+utils.textBlue(_v_Def)+
+                "\n Hit Points          -> "+utils.textBlue(_v_Hp));
+    }
+
+
     private void fightVillian(String vil){
+        int h_Luck;
+        int v_Luck;
         if (vil == "G"){
-            System.out.println("Get Ready to Fight\n" +
-                    "You are about to Fight -> "+utils.textBlue(this.villians[2][1])+
-                    "\n Attack      -> "+utils.textBlue(this.villians[2][2])+
-                    "\n Defence     -> "+utils.textBlue(this.villians[2][3])+
-                    "\n Hit Points  -> "+utils.textBlue(this.villians[2][4]));
+            displayVillianAttribute(this.villians[2][1],this.villians[2][2],this.villians[2][3],this.villians[2][4]);
+
+            h_Luck = new Random().nextInt(3);
+            v_Luck =  new Random().nextInt(3);
+
+            int res_villian = (parseInt(this.villians[2][2]) + parseInt(this.villians[2][2]) +parseInt(this.villians[2][2])) * v_Luck;
+            int res_hero = (this.att + this.def +this.hp) * h_Luck;
+
+            if (res_villian > res_hero){
+                System.out.println("Villian Wins");
+                System.exit(0);
+            }
+            else {
+                utils.printAsterix(35);
+                updateExp(980);
+                System.out.println("Hero Wins");
+                utils.printAsterix(35);
+            }
         }
     }
 
@@ -455,9 +463,11 @@ public class PlayGame {
     private boolean defeatedVillian(){
         for (int i = 0; i < max_board_pos; i++) {
             for (int j = 0; j < max_board_pos; j++) {
-                if(board[i][j] == "V"){
+                if(board[i][j] == "V" ||
+                                board[i][j] == "V") {
                     return false;
                 }
+
             }
         }
         return true;
