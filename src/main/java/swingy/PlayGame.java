@@ -29,7 +29,7 @@ public class PlayGame {
     String playerName = "";
 
     public static void main(String[] args) {
-        final GameController console = new GameController("gui".toUpperCase());
+        final GameController console = new GameController("console".toUpperCase());
 //        PlayGame game = new PlayGame();
 //        game.initiateGame();
     }

@@ -1,11 +1,14 @@
 package swingy.controller;
+import org.jetbrains.annotations.NotNull;
+import swingy.model.GameData;
 import swingy.view.*;
 
 public class GameController {
     private IDisplay display;
+    private GameData gameData = new GameData();
 
-    public GameController(String view){
-        if(view.equals("console")){
+    public GameController(@NotNull String view){
+        if(view.equals("console".toUpperCase())){
             display  = new Console();
             display.initGame();
 //            while (true){
