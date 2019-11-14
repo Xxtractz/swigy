@@ -226,7 +226,7 @@ public class PlayGame {
         v_pos[0] = new Random().nextInt(max_board_pos);
         v_pos[1] = new Random().nextInt(max_board_pos);
         if(herolevel == 1 &&  v_pos[0] != (max_board_pos/2) && v_pos[1] != (max_board_pos/2)){
-            board[v_pos[0]][v_pos[1]] = "\033[31m"+villians[2][0]+"\033[0m";
+            board[v_pos[0]][v_pos[1]] = utils.textRed(villians[2][0]);
         }else
             addVillian();
     }
@@ -266,6 +266,14 @@ public class PlayGame {
 
         board[previous_x][previous_y] = null;
         if(heroX == v_pos[0] && heroY == v_pos[1]){
+            String Curr_villian = board[v_pos[0]][v_pos[1]];
+
+            System.out.println(Curr_villian);
+
+
+            if (Curr_villian.equals(utils.textRed("G"))){
+                fightVillian("G");
+            }
             System.out.println("OOPS Looks like You stepped into the enemies Territory");
             System.exit(0);
         }
@@ -421,21 +429,18 @@ public class PlayGame {
         return ( level*1000+ Math.pow((level - 1), 2)*450);
     }
 
-    private boolean isVillian(String s){
-        System.err.println(s);
-        if (s.equals("G") || s.equals("T") || s.equals("L") || s.equals("E")){
-            return true;
-        }
-        return false;
-
-    }
-
     private void isthereVillian(){
 
     }
 
-    private void fightVillian(){
-
+    private void fightVillian(String vil){
+        if (vil == "G"){
+            System.out.println("Get Ready to Fight\n" +
+                    "You are about to Fight -> "+utils.textBlue(this.villians[2][1])+
+                    "\n Attack      -> "+utils.textBlue(this.villians[2][2])+
+                    "\n Defence     -> "+utils.textBlue(this.villians[2][3])+
+                    "\n Hit Points  -> "+utils.textBlue(this.villians[2][4]));
+        }
     }
 
     private boolean canAdvcance(){
