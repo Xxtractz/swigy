@@ -31,7 +31,7 @@ public class Hero {
         setHP(120);
     }
     public void setIronMan(){
-        setHeroName("IronMan");
+        setHeroName("Iron Man");
         setHeroFlag('I');
         setXP(0);
         setHeroLevel(1);

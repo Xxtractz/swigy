@@ -54,6 +54,7 @@ public class Console implements IDisplay {
 
     @Override
     public void selectHero() {
+        gameover();
         System.exit(0);
     }
 
@@ -95,11 +96,22 @@ public class Console implements IDisplay {
     public void printStat(){
         System.out.println(utils.textRed("Player     : ")+utils.textBlue(player.getPlayerName())
             +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.getHeroName())
-            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.getHP())
+            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.getXP())
             +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.getHeroLevel())
             +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.getAttack())
             +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.getDefence())
             +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.getHP()));
+    }
+
+    @Override
+    public void playGame() {
+
+    }
+
+    private void gameover(){
+        System.out.println(utils.textYellow(utils.Asterisk(200)));
+        System.out.println(utils.textRed(game_data.getGameOverHeader()));
+        System.out.println(utils.textYellow(utils.Asterisk(200)));
     }
 
 }

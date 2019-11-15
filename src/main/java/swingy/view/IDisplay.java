@@ -7,4 +7,5 @@ public interface IDisplay {
     void selectHero();
     void createHero();
     void printStat();
+    void playGame();
 }

@@ -30,15 +30,5 @@ public class GameController {
         display.getUser();
         display.getHero();
     }
-//    private void prompt(){
-//        Scanner input = new Scanner(System.in);
-//        String command = input.nextLine();
-//
-//        System.out.println("Here is my command \t"+command);
-//        executeCommand(command);
-//    }
-//
-//    private void executeCommand(String x){
-//
-//    }
+
 }
