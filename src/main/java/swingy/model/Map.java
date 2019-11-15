@@ -17,11 +17,10 @@ public class Map {
     }
 
     public void printBoard(int boardSize){
-                for(int row = 0;row  < boardSize; row++){
+        for(int row = 0;row  < boardSize; row++){
             int column;
             for (column = 0; column < boardSize ; column++) {
-                if (board[row][column] == null)
-                {
+                if (board[row][column] == null) {
                     System.out.print("| . ");
                 }
                 else {
