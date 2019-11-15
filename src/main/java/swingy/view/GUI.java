@@ -29,4 +29,19 @@ public class GUI implements IDisplay {
     public void getUser() {
 
     }
+
+    @Override
+    public void getHero() {
+
+    }
+
+    @Override
+    public void selectHero(int att) {
+
+    }
+
+    @Override
+    public void createHero(int att) {
+
+    }
 }

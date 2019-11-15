@@ -1,9 +1,11 @@
 package swingy.model;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Player {
     private String PlayerName;
 
-    public void setPlayerName(String playerName) {
+    public void setPlayerName(@NotNull String playerName) {
         PlayerName = playerName;
     }
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SwingyUtils {
     
-    public String printAsterisk(int size){
+    public String Asterisk(int size){
         StringBuilder ast = new StringBuilder();
         for (int i = 0; i < size; i++) ast.append("*");
         return ast.toString();

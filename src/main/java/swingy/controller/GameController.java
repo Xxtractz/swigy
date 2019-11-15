@@ -16,17 +16,19 @@ public class GameController {
             display.initGame();
         }
 
-        while (true) {
-            try {
+        try {
+            while (true) {
                 run();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     private void run(){
         display.getUser();
+        display.getHero();
     }
 //    private void prompt(){
 //        Scanner input = new Scanner(System.in);
