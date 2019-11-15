@@ -45,4 +45,9 @@ public class GUI implements IDisplay {
 
     }
 
+    @Override
+    public void printStat() {
+
+    }
+
 }

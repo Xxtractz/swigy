@@ -62,6 +62,12 @@ public class Console implements IDisplay {
         System.out.print("Lets Create your Hero.!!\n");
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         promptHeroName();
+        utils.successMessage("You Have Successfully Created a Hero");
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+        System.out.println("Current Stats");
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+        printStat();
+        System.exit(1);
     }
 
     private void promptHeroName(){
@@ -70,23 +76,30 @@ public class Console implements IDisplay {
                 "2. Iron Man\n" +
                 "3. Black Panther\n");
         int _heroType = stdInput.nextInt();
-        switch (_heroType){
-            case 1:
-                hero.setThor();
-                break;
-            case 2:
-                hero.setIronMan();
-                break;
-            case 3:
-                hero.setBlackPanther();
-                break;
-            default:
-                System.err.println("Invalid Entry....");
-                promptHeroName();
+        if (_heroType == 1){
+            hero.setThor();
         }
-        System.exit(0);
+        else if (_heroType == 2){
+            hero.setIronMan();
+        }
+        else if (_heroType == 3){
+            hero.setBlackPanther();
+        }
+        else{
+            System.err.println("Invalid Entry....");
+            promptHeroName();
+        }
     }
 
-
+    @Override
+    public void printStat(){
+        System.out.println(utils.textRed("Player     : ")+utils.textBlue(player.getPlayerName())
+            +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.getHeroName())
+            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.getHP())
+            +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.getHeroLevel())
+            +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.getAttack())
+            +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.getDefence())
+            +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.getHP()));
+    }
 
 }

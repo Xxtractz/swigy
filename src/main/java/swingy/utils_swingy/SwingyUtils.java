@@ -12,6 +12,10 @@ public class SwingyUtils {
         return ast.toString();
     }
 
+    public void successMessage(String string){
+        System.out.println("\033[1;32m"+string+"\033[0m");
+    }
+
     public String textRed(String uncolored){
         return "\033[0;31m"+uncolored+"\033[0m";
     }
