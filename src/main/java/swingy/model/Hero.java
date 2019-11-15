@@ -11,7 +11,8 @@ public class Hero {
     private int HP;
     private int XP;
 
-    private void setThor(){
+//    Hero Types
+    public void setThor(){
         setHeroName("Thor");
         setHeroFlag('T');
         setXP(0);
@@ -20,7 +21,7 @@ public class Hero {
         setDefence(55);
         setHP(100);
     }
-    private void setBlackPanther(){
+    public void setBlackPanther(){
         setHeroName("Black Panther");
         setHeroFlag('B');
         setXP(0);
@@ -29,7 +30,7 @@ public class Hero {
         setDefence(100);
         setHP(120);
     }
-    private void setIronMan(){
+    public void setIronMan(){
         setHeroName("IronMan");
         setHeroFlag('I');
         setXP(0);
@@ -39,75 +40,61 @@ public class Hero {
         setHP(100);
     }
 
-    public String getHeroName() {
-        return heroName;
-    }
-
-    public void setHeroName(String heroName) {
-        this.heroName = heroName;
-    }
-
-    public Character getHeroFlag() {
-        return heroFlag;
-    }
-
-    public void setHeroFlag(Character heroFlag) {
+//    Set Hero Attributes
+    private void setHeroName(String heroName) {
+    this.heroName = heroName;
+}
+    private void setHeroFlag(Character heroFlag) {
         this.heroFlag = heroFlag;
     }
-
-    public int getHeroLevel() {
-        return heroLevel;
-    }
-
-    public void setHeroLevel(int heroLevel) {
+    private void setHeroLevel(int heroLevel) {
         this.heroLevel = heroLevel;
     }
-
-    public int getCo_x() {
-        return co_x;
+    private void setAttack(int attack) {
+        Attack = attack;
     }
-
+    private void setDefence(int defence) {
+        Defence = defence;
+    }
+    private void setHP(int HP) {
+        this.HP = HP;
+    }
+    private void setXP(int XP) {
+        this.XP = XP;
+    }
     public void setCo_x(int co_x) {
         this.co_x = co_x;
     }
-
-    public int getCo_Y() {
-        return co_Y;
-    }
-
     public void setCo_Y(int co_Y) {
         this.co_Y = co_Y;
     }
 
+//    Get Hero Attributes
+    public String getHeroName() {
+        return heroName;
+    }
+    public Character getHeroFlag() {
+        return heroFlag;
+    }
+    public int getHeroLevel() {
+        return heroLevel;
+    }
+    public int getCo_x() {
+        return co_x;
+    }
+    public int getCo_Y() {
+        return co_Y;
+    }
     public int getAttack() {
         return Attack;
     }
-
-    public void setAttack(int attack) {
-        Attack = attack;
-    }
-
     public int getDefence() {
         return Defence;
     }
-
-    public void setDefence(int defence) {
-        Defence = defence;
-    }
-
     public int getHP() {
         return HP;
     }
-
-    public void setHP(int HP) {
-        this.HP = HP;
-    }
-
     public int getXP() {
         return XP;
-    }
-
-    public void setXP(int XP) {
-        this.XP = XP;
     }
 }

@@ -11,12 +11,14 @@ public class Console implements IDisplay {
     private SwingyUtils utils;
     private GameData game_data ;
     private Player player;
+    private Hero hero;
 
     public Console(){
         stdInput    = new Scanner(System.in);
         utils = new SwingyUtils();
         game_data = new GameData();
         player = new Player();
+        hero = new Hero();
     }
 
     @Override
@@ -41,11 +43,9 @@ public class Console implements IDisplay {
                         "2. Select previous Hero");
         int Att = stdInput.nextInt();
         if (Att == 1) {
-            utils.Asterisk(75);
-            createHero(Att);
+            createHero();
         }else if (Att == 2) {
-            utils.Asterisk(75);
-            selectHero(Att);
+            selectHero();
         } else {
             System.err.println("Invalid Entry... Please try Again");
             getHero();
@@ -53,20 +53,45 @@ public class Console implements IDisplay {
     }
 
     @Override
-    public void selectHero(int att) {
+    public void selectHero() {
         System.exit(0);
     }
 
     @Override
-    public void createHero(int att) {
+    public void createHero() {
         System.out.print("Lets Create your Hero.!!\n");
-        utils.Asterisk(75);
-//        promptHeroName();
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+        promptHeroName();
 //        promptHeroType();
 //        utils.Asterisk(75);
 //        setHerolevel(1);
 //        setExperience(0);
     }
+
+    private void promptHeroName(){
+                System.out.print("Please Choose Hero Type\n" +
+                "1. Thor\n" +
+                "2. Iron Man\n" +
+                "3. Black Panther\n");
+        int _heroType = Input.nextInt();
+        switch (_heroType){
+            case 1:
+                hero.
+                break;
+            case 2:
+                setHeroType("Iron Man");
+                setHeroAttribute(75,60,120);
+                break;
+            case 3:
+                setHeroType("Black Panther");
+                setHeroAttribute(45,100,120);
+                break;
+            default:
+                System.err.println("Invalid Entry....");
+                promptHeroType();
+        }
+    }
+
 
 
 }
