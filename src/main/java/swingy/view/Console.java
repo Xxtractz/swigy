@@ -62,10 +62,6 @@ public class Console implements IDisplay {
         System.out.print("Lets Create your Hero.!!\n");
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         promptHeroName();
-//        promptHeroType();
-//        utils.Asterisk(75);
-//        setHerolevel(1);
-//        setExperience(0);
     }
 
     private void promptHeroName(){
@@ -73,23 +69,22 @@ public class Console implements IDisplay {
                 "1. Thor\n" +
                 "2. Iron Man\n" +
                 "3. Black Panther\n");
-        int _heroType = Input.nextInt();
+        int _heroType = stdInput.nextInt();
         switch (_heroType){
             case 1:
-                hero.
+                hero.setThor();
                 break;
             case 2:
-                setHeroType("Iron Man");
-                setHeroAttribute(75,60,120);
+                hero.setIronMan();
                 break;
             case 3:
-                setHeroType("Black Panther");
-                setHeroAttribute(45,100,120);
+                hero.setBlackPanther();
                 break;
             default:
                 System.err.println("Invalid Entry....");
-                promptHeroType();
+                promptHeroName();
         }
+        System.exit(0);
     }
 
 

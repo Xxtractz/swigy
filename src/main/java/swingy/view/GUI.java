@@ -36,12 +36,13 @@ public class GUI implements IDisplay {
     }
 
     @Override
-    public void selectHero(int att) {
+    public void selectHero() {
 
     }
 
     @Override
-    public void createHero(int att) {
+    public void createHero() {
 
     }
+
 }
