@@ -109,9 +109,9 @@ public class Console implements IDisplay {
     }
 
     private void gameover(){
-        System.out.println(utils.textYellow(utils.Asterisk(200)));
+        System.out.println(utils.textYellow(utils.Asterisk(125)));
         System.out.println(utils.textRed(game_data.getGameOverHeader()));
-        System.out.println(utils.textYellow(utils.Asterisk(200)));
+        System.out.println(utils.textYellow(utils.Asterisk(125)));
     }
 
 }
