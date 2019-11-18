@@ -17,7 +17,7 @@ public class SwingyUtils {
     }
 
     public String textRed(String uncolored){
-        return "\033[0;31m"+uncolored+"\033[0m";
+        return "\033[1;31m"+uncolored+"\033[0m";
     }
 
     public String textRedInt(int uncolored){
@@ -25,7 +25,7 @@ public class SwingyUtils {
     }
 
     public String textBlue(String uncolored){
-        return "\033[0;34m"+uncolored+"\033[0m";
+        return "\033[1;34m"+uncolored+"\033[0m";
     }
 
     public String textYellow(String uncolored){

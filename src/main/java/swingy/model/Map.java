@@ -37,7 +37,7 @@ public class Map {
         return size;
     }
 
-    public void heroPosition(int x, int y, String c){
+    public void updatePosition(int x, int y, String c){
         this.board[x][y] = c;
     }
 

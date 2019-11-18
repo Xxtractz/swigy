@@ -21,8 +21,8 @@ public class IronMan implements Hero {
         this.heroName = "Iron Man";
         setHeroXP(0);
         setHeroLevel(1);
-        setHeroAttack(100);
-        setHeroDefence(55);
+        setHeroAttack(93);
+        setHeroDefence(80);
         setHeroHP(100);
     }
 

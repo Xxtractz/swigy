@@ -21,9 +21,9 @@ public class BlackPanther implements Hero {
         this.heroName = "Black Panther";
         setHeroXP(0);
         setHeroLevel(1);
-        setHeroAttack(100);
-        setHeroDefence(55);
-        setHeroHP(100);
+        setHeroAttack(45);
+        setHeroDefence(100);
+        setHeroHP(120);
     }
 
     private void setHeroLevel(int heroLevel) {

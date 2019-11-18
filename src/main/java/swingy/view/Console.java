@@ -5,6 +5,10 @@ import swingy.model.hero.BlackPanther;
 import swingy.model.hero.Hero;
 import swingy.model.hero.IronMan;
 import swingy.model.hero.Thor;
+import swingy.model.villian.Erik;
+import swingy.model.villian.Loki;
+import swingy.model.villian.Thanos;
+import swingy.model.villian.Villian;
 import swingy.utils_swingy.SwingyUtils;
 
 import java.util.Scanner;
@@ -17,6 +21,9 @@ public class Console implements IDisplay {
     private Player player;
     private Hero hero;
     private Map map;
+    private Villian thanos;
+    private Villian loki;
+    private Villian erik;
 
     public Console(){
         stdInput    = new Scanner(System.in);
@@ -24,6 +31,9 @@ public class Console implements IDisplay {
         game_data = new GameData();
         player = new Player();
         map = new Map();
+        erik = new Erik();
+        thanos = new Thanos();
+        loki = new Loki();
     }
 
     @Override
@@ -129,13 +139,19 @@ public class Console implements IDisplay {
         map.setSize(hero.heroLevel());
         hero.setCo_x(map.getSize());
         hero.setCo_y(map.getSize());
+        thanos.setVillian_X_Cor(map.getSize() - 3);
+        thanos.setVillian_Y_Cor(2);
+        loki.setVillian_X_Cor(map.getSize() - 6);
+        loki.setVillian_Y_Cor(0);
+        erik.setVillian_X_Cor(map.getSize() - 4);
+        erik.setVillian_Y_Cor(3);
     }
 
     @Override
     public void playGame() {
         map.setSize(hero.heroLevel());
         map.setBoard();
-        map.heroPosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        addHeroViliian();
         map.printBoard();
         gameover();
         System.exit(0);
@@ -147,6 +163,11 @@ public class Console implements IDisplay {
         System.out.println(utils.textYellow(utils.Asterisk(125)));
     }
 
-
+    private void addHeroViliian(){
+        map.updatePosition(hero.co_x(),hero.co_y(),utils.textBlue(hero.heroFlag()));
+        map.updatePosition(thanos.villian_X_Cor(),thanos.villian_Y_Cor(),utils.textRed(thanos.VllianFlag()));
+        map.updatePosition(loki.villian_X_Cor(),loki.villian_Y_Cor(),utils.textRed(loki.VllianFlag()));
+        map.updatePosition(erik.villian_X_Cor(),erik.villian_Y_Cor(),utils.textRed(erik.VllianFlag()));
+    }
 
 }

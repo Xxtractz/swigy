@@ -99,23 +99,4 @@ public class Thor implements Hero {
         return this.heroXP;
     }
 
-//    public void setBlackPanther(){
-//        setHeroName("Black Panther");
-//        setHeroFlag("B");
-//        setXP(0);
-//        setHeroLevel(1);
-//        setAttack(45);
-//        setDefence(100);
-//        setHP(120);
-//    }
-//    public void setIronMan(){
-//        setHeroName("Iron Man");
-//        setHeroFlag("I");
-//        setXP(0);
-//        setHeroLevel(1);
-//        setAttack(93);
-//        setDefence(80);
-//        setHP(100);
-//    }
-
 }
