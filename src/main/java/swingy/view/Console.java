@@ -1,6 +1,8 @@
 package swingy.view;
 
 import swingy.model.*;
+import swingy.model.hero.Hero;
+import swingy.model.hero.Thor;
 import swingy.utils_swingy.SwingyUtils;
 
 import java.util.Scanner;
@@ -19,7 +21,6 @@ public class Console implements IDisplay {
         utils = new SwingyUtils();
         game_data = new GameData();
         player = new Player();
-        hero = new Hero();
         map = new Map();
     }
 
@@ -91,13 +92,13 @@ public class Console implements IDisplay {
         if (stdInput.hasNextInt()){
             int _heroType = stdInput.nextInt();
             if (_heroType == 1){
-                hero.setThor();
+                hero = new Thor();
             }
             else if (_heroType == 2){
-                hero.setIronMan();
+//                hero.setIronMan();
             }
             else if (_heroType == 3){
-                hero.setBlackPanther();
+//                hero.setBlackPanther();
             }
             else{
                 System.err.println("Invalid Entry....");
@@ -114,25 +115,25 @@ public class Console implements IDisplay {
     @Override
     public void printStat(){
         System.out.println(utils.textRed("Player     : ")+utils.textBlue(player.getPlayerName())
-            +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.getHeroName())
-            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.getXP())
-            +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.getHeroLevel())
-            +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.getAttack())
-            +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.getDefence())
-            +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.getHP()));
+            +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.heroName())
+            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.XP())
+            +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.heroLevel())
+            +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.Attack())
+            +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.Defence())
+            +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.HP()));
     }
     
-    public void beforePlay(){
-        map.setSize(hero.getHeroLevel());
+    private void beforePlay(){
+        map.setSize(hero.heroLevel());
         hero.setCo_x(map.getSize());
-        hero.setCo_Y(map.getSize());
+        hero.setCo_y(map.getSize());
     }
 
     @Override
     public void playGame() {
-        map.setSize(hero.getHeroLevel());
+        map.setSize(hero.heroLevel());
         map.setBoard();
-        map.heroPosition(hero.getCo_x(),hero.getCo_Y(),hero.getHeroFlag());
+        map.heroPosition(hero.co_x(),hero.co_y(),hero.heroFlag());
         map.printBoard();
         gameover();
         System.exit(0);

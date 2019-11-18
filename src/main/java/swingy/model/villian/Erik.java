@@ -1,4 +1,4 @@
-package swingy.model.Villians;
+package swingy.model.villian;
 
 public class Erik implements Villian {
     @Override

@@ -1,6 +1,6 @@
-package swingy.model.Villians;
+package swingy.model.villian;
 
-public class Loki implements Villian {
+public class Thanos implements Villian {
     @Override
     public String villianName() {
         return null;

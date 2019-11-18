@@ -1,4 +1,4 @@
-package swingy.model.Villians;
+package swingy.model.villian;
 
 public interface Villian {
     String villianName();
