@@ -1,6 +1,7 @@
 package swingy.model;
 
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class Map {
     private int size;
@@ -34,6 +35,16 @@ public class Map {
 
     public int getSize() {
         return size;
+    }
+
+    public void heroPosition(int x, int y, String c){
+        this.board[x][y] = c;
+    }
+
+    public void VillianPosition(@NotNull int[] x, @NotNull int[] y, String[] c){
+        for (int i = 0; i < x.length ; i++) {
+            this.board[x[i]][y[i]] = c[i];
+        }
     }
 
     public void setBoard() {

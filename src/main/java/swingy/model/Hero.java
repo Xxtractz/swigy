@@ -2,7 +2,7 @@ package swingy.model;
 
 public class Hero {
     private String heroName;
-    private Character heroFlag;
+    private String heroFlag;
     private int heroLevel;
     private int co_x;
     private int co_Y;
@@ -14,7 +14,7 @@ public class Hero {
 //    Hero Types
     public void setThor(){
         setHeroName("Thor");
-        setHeroFlag('T');
+        setHeroFlag("T");
         setXP(0);
         setHeroLevel(1);
         setAttack(100);
@@ -23,7 +23,7 @@ public class Hero {
     }
     public void setBlackPanther(){
         setHeroName("Black Panther");
-        setHeroFlag('B');
+        setHeroFlag("B");
         setXP(0);
         setHeroLevel(1);
         setAttack(45);
@@ -32,7 +32,7 @@ public class Hero {
     }
     public void setIronMan(){
         setHeroName("Iron Man");
-        setHeroFlag('I');
+        setHeroFlag("I");
         setXP(0);
         setHeroLevel(1);
         setAttack(93);
@@ -44,7 +44,7 @@ public class Hero {
     private void setHeroName(String heroName) {
     this.heroName = heroName;
 }
-    private void setHeroFlag(Character heroFlag) {
+    private void setHeroFlag(String heroFlag) {
         this.heroFlag = heroFlag;
     }
     private void setHeroLevel(int heroLevel) {
@@ -73,7 +73,7 @@ public class Hero {
     public String getHeroName() {
         return heroName;
     }
-    public Character getHeroFlag() {
+    public String getHeroFlag() {
         return heroFlag;
     }
     public int getHeroLevel() {

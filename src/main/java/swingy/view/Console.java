@@ -30,6 +30,7 @@ public class Console implements IDisplay {
         System.out.println(utils.textBlue(utils.Asterisk(119)));
         getUser();
         getHero();
+        beforePlay();
     }
 
     @Override
@@ -80,7 +81,6 @@ public class Console implements IDisplay {
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         printStat();
         System.out.println(utils.textBlue(utils.Asterisk(75)));
-
     }
 
     private void promptHeroName(){
@@ -121,11 +121,18 @@ public class Console implements IDisplay {
             +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.getDefence())
             +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.getHP()));
     }
+    
+    public void beforePlay(){
+        map.setSize(hero.getHeroLevel());
+        hero.setCo_x(map.getSize());
+        hero.setCo_Y(map.getSize());
+    }
 
     @Override
     public void playGame() {
         map.setSize(hero.getHeroLevel());
         map.setBoard();
+        map.heroPosition(hero.getCo_x(),hero.getCo_Y(),hero.getHeroFlag());
         map.printBoard();
         gameover();
         System.exit(0);
