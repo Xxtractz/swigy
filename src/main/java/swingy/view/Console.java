@@ -4,7 +4,7 @@ import swingy.model.*;
 import swingy.utils_swingy.SwingyUtils;
 
 import java.util.Scanner;
-import javax.annotation.*;
+import java.lang.*;
 
 public class Console implements IDisplay {
     private Scanner stdInput;
@@ -12,6 +12,7 @@ public class Console implements IDisplay {
     private GameData game_data ;
     private Player player;
     private Hero hero;
+    private Map map;
 
     public Console(){
         stdInput    = new Scanner(System.in);
@@ -19,6 +20,7 @@ public class Console implements IDisplay {
         game_data = new GameData();
         player = new Player();
         hero = new Hero();
+        map = new Map();
     }
 
     @Override
@@ -26,6 +28,8 @@ public class Console implements IDisplay {
         System.out.println(utils.textBlue(game_data.getGameBeginHeader()));
         System.out.println(utils.textYellow(game_data.gameInstructions()));
         System.out.println(utils.textBlue(utils.Asterisk(119)));
+        getUser();
+        getHero();
     }
 
     @Override
@@ -41,15 +45,22 @@ public class Console implements IDisplay {
                         "!, Please Select Below, to Proceed\n" +
                         "1. Create a New Hero\n" +
                         "2. Select previous Hero");
-        int Att = stdInput.nextInt();
-        if (Att == 1) {
-            createHero();
-        }else if (Att == 2) {
-            selectHero();
-        } else {
+        if (stdInput.hasNextInt()){
+            int Att = stdInput.nextInt();
+            if (Att == 1) {
+                createHero();
+            }else if (Att == 2) {
+                selectHero();
+            } else {
+                System.err.println("Invalid Entry... Please try Again");
+                getHero();
+            }
+        }else {
             System.err.println("Invalid Entry... Please try Again");
+            stdInput.nextLine();
             getHero();
         }
+
     }
 
     @Override
@@ -68,7 +79,8 @@ public class Console implements IDisplay {
         System.out.println("Current Stats");
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         printStat();
-        System.exit(1);
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+
     }
 
     private void promptHeroName(){
@@ -76,18 +88,25 @@ public class Console implements IDisplay {
                 "1. Thor\n" +
                 "2. Iron Man\n" +
                 "3. Black Panther\n");
-        int _heroType = stdInput.nextInt();
-        if (_heroType == 1){
-            hero.setThor();
-        }
-        else if (_heroType == 2){
-            hero.setIronMan();
-        }
-        else if (_heroType == 3){
-            hero.setBlackPanther();
+        if (stdInput.hasNextInt()){
+            int _heroType = stdInput.nextInt();
+            if (_heroType == 1){
+                hero.setThor();
+            }
+            else if (_heroType == 2){
+                hero.setIronMan();
+            }
+            else if (_heroType == 3){
+                hero.setBlackPanther();
+            }
+            else{
+                System.err.println("Invalid Entry....");
+                promptHeroName();
+            }
         }
         else{
             System.err.println("Invalid Entry....");
+            stdInput.nextLine();
             promptHeroName();
         }
     }
@@ -105,7 +124,11 @@ public class Console implements IDisplay {
 
     @Override
     public void playGame() {
-
+        map.setSize(hero.getHeroLevel());
+        map.setBoard();
+        map.printBoard();
+        gameover();
+        System.exit(0);
     }
 
     private void gameover(){
@@ -113,5 +136,7 @@ public class Console implements IDisplay {
         System.out.println(utils.textRed(game_data.getGameOverHeader()));
         System.out.println(utils.textYellow(utils.Asterisk(125)));
     }
+
+
 
 }

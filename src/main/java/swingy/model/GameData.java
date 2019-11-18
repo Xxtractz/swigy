@@ -40,4 +40,5 @@ public class GameData {
                 "\t\t\t\t     >>>  If you defeat a villian, You will get more powerful, Your XP,ATT,DEF,HP will Increase\n" +
                 "\t\t\t\tGood Luck on your Journey... STAY AWAY FROM THANOS at a lower Level";
     }
+
 }

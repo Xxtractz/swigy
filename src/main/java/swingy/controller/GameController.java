@@ -27,8 +27,7 @@ public class GameController {
     }
 
     private void run(){
-        display.getUser();
-        display.getHero();
+        display.playGame();
     }
 
 }

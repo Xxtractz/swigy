@@ -63,10 +63,10 @@ public class Hero {
         this.XP = XP;
     }
     public void setCo_x(int co_x) {
-        this.co_x = co_x;
+        this.co_x = co_x/2;
     }
     public void setCo_Y(int co_Y) {
-        this.co_Y = co_Y;
+        this.co_Y = co_Y/2;
     }
 
 //    Get Hero Attributes
