@@ -26,11 +26,14 @@ public class GameData {
 
     public String gameInstructions(){
         return  "\t\t\t\tHi, Welcome to Swingy at Text Base RPG....\n" +
+                "\t\t\t\t##############################################################################\n"+
                 "\t\t\t\tHere are Instructions on how to play:\n" +
                 "\t\t\t\t-> Move North -> Hero goes upwards\n" +
                 "\t\t\t\t-> Move East -> Hero goes Right\n" +
                 "\t\t\t\t-> Move South -> Hero goes downwards\n" +
                 "\t\t\t\t-> Move West -> Hero goes Left\n" +
+                "\t\t\t\t-> Villians are in Red_-_ Heros are Blue\n"+
+                "\t\t\t\t##############################################################################\n"+
                 "\t\t\t\tHere are rules:\n" +
                 "\t\t\t\t-> To win you need to pass the End of the MAP\n" +
                 "\t\t\t\t-> To Advance to next Level You need to accumulate above 1000xp\n" +
