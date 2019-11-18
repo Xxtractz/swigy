@@ -1,7 +1,9 @@
 package swingy.view;
 
 import swingy.model.*;
+import swingy.model.hero.BlackPanther;
 import swingy.model.hero.Hero;
+import swingy.model.hero.IronMan;
 import swingy.model.hero.Thor;
 import swingy.utils_swingy.SwingyUtils;
 
@@ -95,10 +97,10 @@ public class Console implements IDisplay {
                 hero = new Thor();
             }
             else if (_heroType == 2){
-//                hero.setIronMan();
+                hero = new IronMan();
             }
             else if (_heroType == 3){
-//                hero.setBlackPanther();
+                hero = new BlackPanther();
             }
             else{
                 System.err.println("Invalid Entry....");

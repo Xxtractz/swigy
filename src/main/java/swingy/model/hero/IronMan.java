@@ -2,8 +2,8 @@ package swingy.model.hero;
 
 import org.jetbrains.annotations.Contract;
 
-public class Thor implements Hero {
-//    Default Values... wont change
+public class IronMan implements Hero {
+    //    Default Values... wont change
     private final String heroName;
     private final String heroFlag;
 
@@ -16,9 +16,9 @@ public class Thor implements Hero {
     private int co_y;
 
     @Contract(pure = true)
-    public Thor(){
-        this.heroFlag = "T";
-        this.heroName = "Thor";
+    public IronMan(){
+        this.heroFlag = "I";
+        this.heroName = "Iron Man";
         setHeroXP(0);
         setHeroLevel(1);
         setHeroAttack(100);
@@ -98,24 +98,4 @@ public class Thor implements Hero {
     public int XP() {
         return this.heroXP;
     }
-
-//    public void setBlackPanther(){
-//        setHeroName("Black Panther");
-//        setHeroFlag("B");
-//        setXP(0);
-//        setHeroLevel(1);
-//        setAttack(45);
-//        setDefence(100);
-//        setHP(120);
-//    }
-//    public void setIronMan(){
-//        setHeroName("Iron Man");
-//        setHeroFlag("I");
-//        setXP(0);
-//        setHeroLevel(1);
-//        setAttack(93);
-//        setDefence(80);
-//        setHP(100);
-//    }
-
 }
