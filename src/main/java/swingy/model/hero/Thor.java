@@ -47,11 +47,11 @@ public class Thor implements Hero {
     }
 
     public void setCo_x(int co_x) {
-        this.co_x = co_x/2;
+        this.co_x = co_x;
     }
 
     public void setCo_y(int co_y) {
-        this.co_y = co_y/2;
+        this.co_y = co_y;
     }
 
     @Override

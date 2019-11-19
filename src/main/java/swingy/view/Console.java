@@ -79,7 +79,7 @@ public class Console implements IDisplay {
 
     @Override
     public void selectHero() {
-        gameover();
+        gameOver();
         System.exit(0);
     }
 
@@ -137,8 +137,8 @@ public class Console implements IDisplay {
     
     private void beforePlay(){
         map.setSize(hero.heroLevel());
-        hero.setCo_x(map.getSize());
-        hero.setCo_y(map.getSize());
+        hero.setCo_x(map.getSize()/2);
+        hero.setCo_y(map.getSize()/2);
         thanos.setVillian_X_Cor(map.getSize() - 3);
         thanos.setVillian_Y_Cor(2);
         loki.setVillian_X_Cor(map.getSize() - 6);
@@ -151,23 +151,101 @@ public class Console implements IDisplay {
     public void playGame() {
         map.setSize(hero.heroLevel());
         map.setBoard();
-        addHeroViliian();
+        populateBoard();
         map.printBoard();
-        gameover();
-        System.exit(0);
+        movement();
     }
 
-    private void gameover(){
+    private void gameOver(){
         System.out.println(utils.textYellow(utils.Asterisk(125)));
         System.out.println(utils.textRed(game_data.getGameOverHeader()));
         System.out.println(utils.textYellow(utils.Asterisk(125)));
     }
 
-    private void addHeroViliian(){
+    private void populateBoard(){
         map.updatePosition(hero.co_x(),hero.co_y(),utils.textBlue(hero.heroFlag()));
         map.updatePosition(thanos.villian_X_Cor(),thanos.villian_Y_Cor(),utils.textRed(thanos.VllianFlag()));
         map.updatePosition(loki.villian_X_Cor(),loki.villian_Y_Cor(),utils.textRed(loki.VllianFlag()));
         map.updatePosition(erik.villian_X_Cor(),erik.villian_Y_Cor(),utils.textRed(erik.VllianFlag()));
+    }
+
+    private void movement(){
+        stdInput.nextLine();
+        System.out.println("Please Make a Move\n" +
+                "1. Move North\n" +
+                "2. Move East\n" +
+                "3. Move South\n"+
+                "4. Move West\n" +
+                utils.textRed("********Enter 0 to Exit*********"));
+        if (stdInput.hasNextInt()){
+        int _heroMove = stdInput.nextInt();
+        switch (_heroMove) {
+            case 0:
+                endGame();
+                break;
+            case 1:
+                moveNorth();
+                break;
+            case 2:
+                moveEast();
+                break;
+            case 3:
+                moveSouth();
+                break;
+            case 4:
+                moveWest();
+                break;
+            default:
+                System.err.println("Invalid Entry....");
+        }}else {
+            System.err.println("Invalid Entry....");
+            movement();
+        }
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+        map.printBoard();
+        movement();
+    }
+
+    private void endGame(){
+        gameOver();
+        System.exit(0);
+    }
+
+    private void moveNorth(){
+        if(hero.co_x() == 0){
+            endGame();
+        }
+        hero.setCo_x(hero.co_x() - 1);
+        map.updatePosition(hero.co_x()+1,hero.co_y(),null);
+        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+
+    }
+
+    private void moveSouth(){
+        if(hero.co_x() == map.getSize() - 1){
+            endGame();
+        }
+        hero.setCo_x(hero.co_x() + 1);
+        map.updatePosition(hero.co_x() - 1,hero.co_y(),null);
+        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+    }
+
+    private void moveEast(){
+        if(hero.co_x() == 0){
+            endGame();
+        }
+        hero.setCo_x(hero.co_x() - 1);
+        map.updatePosition(hero.co_x()+1,hero.co_y(),null);
+        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+    }
+
+    private void moveWest(){
+        if(hero.co_x() == 0){
+            endGame();
+        }
+        hero.setCo_x(hero.co_x() - 1);
+        map.updatePosition(hero.co_x()+1,hero.co_y(),null);
+        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
     }
 
 }
