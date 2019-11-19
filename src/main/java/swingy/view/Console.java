@@ -11,6 +11,7 @@ import swingy.model.villian.Thanos;
 import swingy.model.villian.Villian;
 import swingy.utils_swingy.SwingyUtils;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.lang.*;
 
@@ -139,12 +140,31 @@ public class Console implements IDisplay {
         map.setSize(hero.heroLevel());
         hero.setCo_x(map.getSize()/2);
         hero.setCo_y(map.getSize()/2);
-        thanos.setVillian_X_Cor(map.getSize() - 3);
-        thanos.setVillian_Y_Cor(2);
-        loki.setVillian_X_Cor(map.getSize() - 6);
-        loki.setVillian_Y_Cor(0);
-        erik.setVillian_X_Cor(map.getSize() - 4);
-        erik.setVillian_Y_Cor(3);
+
+        setThanosLocation();
+        setLokiLocation();
+        setErikLocation();
+    }
+
+    private void setThanosLocation(){
+        int x = new Random().nextInt(map.getSize());
+        int y = new Random().nextInt(map.getSize());
+        thanos.setVillian_X_Cor(x);
+        thanos.setVillian_Y_Cor(y);
+    }
+
+    private void setLokiLocation(){
+        int x = new Random().nextInt(map.getSize());
+        int y = new Random().nextInt(map.getSize());
+        loki.setVillian_X_Cor(x);
+        loki.setVillian_Y_Cor(y);
+    }
+
+    private void setErikLocation(){
+        int x = new Random().nextInt(map.getSize());
+        int y = new Random().nextInt(map.getSize());
+        erik.setVillian_X_Cor(x);
+        erik.setVillian_Y_Cor(y);
     }
 
     @Override
@@ -217,7 +237,11 @@ public class Console implements IDisplay {
         }
         hero.setCo_x(hero.co_x() - 1);
         map.updatePosition(hero.co_x()+1,hero.co_y(),null);
-        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        map.updatePosition(
+                hero.co_x(),
+                hero.co_y(),
+                utils.textBlue(hero.heroFlag())
+        );
 
     }
 
@@ -227,25 +251,37 @@ public class Console implements IDisplay {
         }
         hero.setCo_x(hero.co_x() + 1);
         map.updatePosition(hero.co_x() - 1,hero.co_y(),null);
-        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        map.updatePosition(
+                hero.co_x(),
+                hero.co_y(),
+                utils.textBlue(hero.heroFlag())
+        );
     }
 
     private void moveEast(){
-        if(hero.co_x() == 0){
+        if(hero.co_y() == map.getSize() - 1){
             endGame();
         }
-        hero.setCo_x(hero.co_x() - 1);
-        map.updatePosition(hero.co_x()+1,hero.co_y(),null);
-        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        hero.setCo_y(hero.co_y() + 1);
+        map.updatePosition(hero.co_x(),hero.co_y() - 1,null);
+        map.updatePosition(
+                hero.co_x(),
+                hero.co_y(),
+                utils.textBlue(hero.heroFlag())
+        );
     }
 
     private void moveWest(){
-        if(hero.co_x() == 0){
+        if(hero.co_y() == 0){
             endGame();
         }
-        hero.setCo_x(hero.co_x() - 1);
-        map.updatePosition(hero.co_x()+1,hero.co_y(),null);
-        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        hero.setCo_y(hero.co_y() - 1);
+        map.updatePosition(hero.co_x(),hero.co_y() + 1,null);
+        map.updatePosition(
+                hero.co_x(),
+                hero.co_y(),
+                utils.textBlue(hero.heroFlag())
+        );
     }
 
 }
