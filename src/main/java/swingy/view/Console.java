@@ -1,10 +1,7 @@
 package swingy.view;
 
 import swingy.model.*;
-import swingy.model.hero.BlackPanther;
-import swingy.model.hero.Hero;
-import swingy.model.hero.IronMan;
-import swingy.model.hero.Thor;
+import swingy.model.hero.*;
 import swingy.model.villian.Erik;
 import swingy.model.villian.Loki;
 import swingy.model.villian.Thanos;
@@ -236,6 +233,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_x(hero.co_x() - 1);
+        fight();
         map.updatePosition(hero.co_x()+1,hero.co_y(),null);
         map.updatePosition(
                 hero.co_x(),
@@ -250,6 +248,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_x(hero.co_x() + 1);
+        fight();
         map.updatePosition(hero.co_x() - 1,hero.co_y(),null);
         map.updatePosition(
                 hero.co_x(),
@@ -263,6 +262,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_y(hero.co_y() + 1);
+        fight();
         map.updatePosition(hero.co_x(),hero.co_y() - 1,null);
         map.updatePosition(
                 hero.co_x(),
@@ -276,6 +276,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_y(hero.co_y() - 1);
+        fight();
         map.updatePosition(hero.co_x(),hero.co_y() + 1,null);
         map.updatePosition(
                 hero.co_x(),
@@ -284,4 +285,21 @@ public class Console implements IDisplay {
         );
     }
 
+    private void fight(){
+        if ((hero.co_x() == thanos.villian_X_Cor()) &&
+                (hero.co_y() == thanos.villian_Y_Cor())){
+            System.out.println("Thanos");
+            gameOver();
+        }
+        if ((hero.co_x() == erik.villian_X_Cor()) &&
+                (hero.co_y() == erik.villian_Y_Cor())){
+            System.out.println("Thanos");
+            gameOver();
+        }
+        if ((hero.co_x() == loki.villian_X_Cor()) &&
+                (hero.co_y() == loki.villian_Y_Cor())){
+            System.out.println("Thanos");
+            gameOver();
+        }
+    }
 }
