@@ -288,18 +288,58 @@ public class Console implements IDisplay {
     private void fight(){
         if ((hero.co_x() == thanos.villian_X_Cor()) &&
                 (hero.co_y() == thanos.villian_Y_Cor())){
-            System.out.println("Thanos");
+            fightThanos();
             gameOver();
         }
         if ((hero.co_x() == erik.villian_X_Cor()) &&
                 (hero.co_y() == erik.villian_Y_Cor())){
-            System.out.println("Thanos");
+            fightErik();
             gameOver();
         }
         if ((hero.co_x() == loki.villian_X_Cor()) &&
                 (hero.co_y() == loki.villian_Y_Cor())){
-            System.out.println("Thanos");
+           fightLoki();
             gameOver();
+        }
+    }
+
+    private void fightThanos(){
+        int thanosPower = thanos.villian_Attack() + thanos.villian_Defence() + thanos.villian_HP();
+        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int luck = new Random().nextInt(3);
+
+        if (thanosPower > heorPower*luck){
+            System.out.println("Thanos Wins");
+            gameOver();
+        }
+        else {
+            System.out.println("You defeated Thanos ");
+        }
+    }
+    private void fightErik(){
+        int erikPower = erik.villian_Attack() + erik.villian_Defence() + erik.villian_HP();
+        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int luck = new Random().nextInt(3);
+
+        if (erikPower > heorPower*luck){
+            System.out.println("Thanos Wins");
+            gameOver();
+        }
+        else {
+            System.out.println("You defeated Thanos ");
+        }
+    }
+    private void fightLoki(){
+        int lokiPower = loki.villian_Attack() + loki.villian_Defence() + loki.villian_HP();
+        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int luck = new Random().nextInt(3);
+
+        if (lokiPower > heorPower*luck){
+            System.out.println("Thanos Wins");
+            gameOver();
+        }
+        else {
+            System.out.println("You defeated Thanos ");
         }
     }
 }
