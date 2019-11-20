@@ -1,11 +1,13 @@
 package swingy.model;
 
-import org.jetbrains.annotations.NotNull;
+
+import javax.validation.constraints.NotNull;
 
 public class Player {
     private String PlayerName;
 
-    public void setPlayerName(@NotNull String playerName) {
+    @NotNull
+    public void setPlayerName( String playerName) {
         PlayerName = playerName;
     }
 

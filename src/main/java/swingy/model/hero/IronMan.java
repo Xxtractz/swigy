@@ -26,23 +26,23 @@ public class IronMan implements Hero {
         setHeroHP(100);
     }
 
-    private void setHeroLevel(int heroLevel) {
+    public void setHeroLevel(int heroLevel) {
         this.heroLevel = heroLevel;
     }
 
-    private void setHeroAttack(int heroAttack) {
+    public void setHeroAttack(int heroAttack) {
         this.heroAttack = heroAttack;
     }
 
-    private void setHeroDefence(int heroDefence) {
+    public void setHeroDefence(int heroDefence) {
         this.heroDefence = heroDefence;
     }
 
-    private void setHeroHP(int heroHP) {
+    public void setHeroHP(int heroHP) {
         this.heroHP = heroHP;
     }
 
-    private void setHeroXP(int heroXP) {
+    public void setHeroXP(int heroXP) {
         this.heroXP = heroXP;
     }
 

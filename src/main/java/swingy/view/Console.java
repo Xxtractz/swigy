@@ -10,6 +10,7 @@ import swingy.model.villain.Villain;
 import swingy.utils_swingy.SwingyUtils;
 
 import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotBlank;
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.*;
@@ -35,6 +36,8 @@ public class Console implements IDisplay {
         thanos = new Thanos();
         loki = new Loki();
     }
+
+    //START Initiation Stage Game
 
     @Override
     public void initGame(){
@@ -124,17 +127,6 @@ public class Console implements IDisplay {
         }
     }
 
-    @Override
-    public void printStat(){
-        System.out.println(utils.textRed("Player     : ")+utils.textBlue(player.getPlayerName())
-            +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.heroName())
-            +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.XP())
-            +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.heroLevel())
-            +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.Attack())
-            +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.Defence())
-            +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.HP()));
-    }
-    
     private void beforePlay(){
         map.setSize(hero.heroLevel());
         hero.setCo_x(map.getSize()/2);
@@ -178,13 +170,50 @@ public class Console implements IDisplay {
         }
     }
 
+     //GAME Utils Start
+
     @Override
-    public void playGame() {
-        map.setSize(hero.heroLevel());
-        map.setBoard();
-        populateBoard();
-        map.printBoard();
-        movement();
+    public void printStat(){
+        System.out.println(utils.textRed("Player     : ")+utils.textBlue(player.getPlayerName())
+                +utils.textRed("\nHeroName   : ")+utils.textBlue(hero.heroName())
+                +utils.textRed("\nXP         : ")+utils.textBlueInt(hero.XP())
+                +utils.textRed("\nLevel      : ")+utils.textBlueInt(hero.heroLevel())
+                +utils.textRed("\nAttack     : ")+utils.textBlueInt(hero.Attack())
+                +utils.textRed("\nDefence    : ")+utils.textBlueInt(hero.Defence())
+                +utils.textRed("\nHit Points : ")+utils.textBlueInt(hero.HP()));
+    }
+
+    private void populateBoard(){
+        map.updatePosition(hero.co_x(),hero.co_y(),utils.textBlue(hero.heroFlag()));
+        map.updatePosition(thanos.villain_X_Cor(),thanos.villain_Y_Cor(),utils.textRed(thanos.villainFlag()));
+        map.updatePosition(loki.villain_X_Cor(),loki.villain_Y_Cor(),utils.textRed(loki.villainFlag()));
+        map.updatePosition(erik.villain_X_Cor(),erik.villain_Y_Cor(),utils.textRed(erik.villainFlag()));
+    }
+
+    private void heroVsVillainStats(@NotNull Villain villain){
+        System.out.println("Get Ready to Fight\n" +
+                "You are about to Fight -> "+utils.textBlue(villain.villainName())+
+                "\n Attack              -> "+utils.textBlueInt(villain.villain_Attack())+ "\t\tYour Attack ->"+utils.textBlueInt(hero.Attack())+
+                "\n Defence             -> "+utils.textBlueInt(villain.villain_Defence())+ "\t\tYour Defence  ->"+utils.textBlueInt(hero.Defence())+
+                "\n Hit Points          -> "+utils.textBlueInt(villain.villain_HP()) +"\t\tYour Hit Points ->"+utils.textBlueInt(hero.HP()));
+    }
+
+    @AssertTrue
+    private void letsFight(@NotNull Boolean fight, int x,int y){
+        if(fight){
+            stdInput.nextLine();
+            System.out.println("Oops looks like you have stumbled onto a villain \nDo you wish to fight \n1. Yes \n2. No");
+
+            @NotBlank
+            int fighting = stdInput.nextInt();
+            if(fighting == 1){
+                fight();
+                map.updatePosition(hero.co_x()+1,hero.co_y(),null);
+            }else {
+                hero.setCo_x(x);
+                hero.setCo_y(y);
+            }
+        }
     }
 
     private void gameOver(){
@@ -193,11 +222,27 @@ public class Console implements IDisplay {
         System.out.println(utils.textYellow(utils.Asterisk(125)));
     }
 
-    private void populateBoard(){
-        map.updatePosition(hero.co_x(),hero.co_y(),utils.textBlue(hero.heroFlag()));
-        map.updatePosition(thanos.villain_X_Cor(),thanos.villain_Y_Cor(),utils.textRed(thanos.villainFlag()));
-        map.updatePosition(loki.villain_X_Cor(),loki.villain_Y_Cor(),utils.textRed(loki.villainFlag()));
-        map.updatePosition(erik.villain_X_Cor(),erik.villain_Y_Cor(),utils.textRed(erik.villainFlag()));
+    private void endGame(){
+        gameOver();
+        System.exit(0);
+    }
+
+    private void unsetVillain(@NotNull Villain villian){
+        villian.setVillain_X_Cor(-1);
+        villian.setVillain_Y_Cor(-1);
+    }
+    //GAME Utils End
+
+
+    //Game Play Start
+
+    @Override
+    public void playGame() {
+        map.setSize(hero.heroLevel());
+        map.setBoard();
+        populateBoard();
+        map.printBoard();
+        movement();
     }
 
     private void movement(){
@@ -238,11 +283,6 @@ public class Console implements IDisplay {
         movement();
     }
 
-    private void endGame(){
-        gameOver();
-        System.exit(0);
-    }
-
     private void moveNorth(){
         if(hero.co_x() == 0){
             endGame();
@@ -261,7 +301,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_x(hero.co_x() + 1);
-        fight();
+        letsFight(isFight(), hero.co_x() - 1,hero.co_y());
         map.updatePosition(hero.co_x() - 1,hero.co_y(),null);
         map.updatePosition(
                 hero.co_x(),
@@ -275,7 +315,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_y(hero.co_y() + 1);
-        fight();
+        letsFight(isFight(), hero.co_x(),hero.co_y() - 1);
         map.updatePosition(hero.co_x(),hero.co_y() - 1,null);
         map.updatePosition(
                 hero.co_x(),
@@ -289,7 +329,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_y(hero.co_y() - 1);
-        fight();
+        letsFight(isFight(), hero.co_x() ,hero.co_y() + 1);
         map.updatePosition(hero.co_x(),hero.co_y() + 1,null);
         map.updatePosition(
                 hero.co_x(),
@@ -311,21 +351,6 @@ public class Console implements IDisplay {
                     (hero.co_y() == loki.villain_Y_Cor());
     }
 
-    @AssertTrue
-    private void letsFight(@NotNull Boolean fight, int x,int y){
-        if(fight){
-            stdInput.nextLine();
-            System.out.println("Oops looks like you have stumbled onto a villain \nDo you whish to fight \n1. Yes \n2.No");
-            int fighting = stdInput.nextInt();
-            if(fighting == 1){
-                fight();
-                map.updatePosition(hero.co_x()+1,hero.co_y(),null);
-            }else {
-                hero.setCo_x(x);
-                hero.setCo_y(y);
-            }
-        }
-    }
     private void fight(){
         if ((hero.co_x() == thanos.villain_X_Cor()) &&
                 (hero.co_y() == thanos.villain_Y_Cor())){
@@ -350,25 +375,22 @@ public class Console implements IDisplay {
         }
     }
 
-    private void heroVsVillainStats(@NotNull Villain villain){
-        System.out.println("Get Ready to Fight\n" +
-                "You are about to Fight -> "+utils.textBlue(villain.villainName())+
-                "\n Attack              -> "+utils.textBlueInt(villain.villain_Attack())+ "\t\tYour Attack ->"+utils.textBlueInt(hero.Attack())+
-                "\n Defence             -> "+utils.textBlueInt(villain.villain_Defence())+ "\t\tYour Defence  ->"+utils.textBlueInt(hero.Defence())+
-                "\n Hit Points          -> "+utils.textBlueInt(villain.villain_HP()) +"\t\tYour Hit Points ->"+utils.textBlueInt(hero.HP()));
-    }
-
     private void fightThanos(){
         int thanosPower = thanos.villain_Attack() + thanos.villain_Defence() + thanos.villain_HP();
         int heroPower = hero.Attack() + hero.Defence()+ hero.HP();
         int luck = new Random().nextInt(3);
 
         if (thanosPower > heroPower*luck){
-            System.out.println(thanos.villainName()+" Wins");
+            System.out.println(utils.textRed(thanos.villainName()+" Wins"));
             gameOver();
         }
         else {
-            System.out.println("You defeated "+thanos.villainName());
+            unsetVillain(thanos);
+            hero.setHeroAttack(hero.Attack() + 80);
+            hero.setHeroDefence(hero.Defence() + 80);
+            hero.setHeroHP(hero.HP() + 80);
+            hero.setHeroXP(hero.XP() + 1800);
+            utils.successMessage("You defeated "+thanos.villainName()+"\n You have been upgraded");
         }
     }
     private void fightErik(){
@@ -377,11 +399,16 @@ public class Console implements IDisplay {
         int luck = new Random().nextInt(3);
 
         if (erikPower > heroPower*luck){
-            System.out.println(erik.villainName()+" Wins");
+            System.out.println(utils.textRed(erik.villainName()+" Wins"));
             gameOver();
         }
         else {
-            System.out.println("You defeated "+erik.villainName());
+            unsetVillain(erik);
+            hero.setHeroAttack(hero.Attack() + 40);
+            hero.setHeroDefence(hero.Defence() + 40);
+            hero.setHeroHP(hero.HP() + 40);
+            hero.setHeroXP(hero.XP() + 980);
+            utils.successMessage("You defeated "+erik.villainName()+"\n You have been upgraded");
         }
     }
     private void fightLoki(){
@@ -390,11 +417,18 @@ public class Console implements IDisplay {
         int luck = new Random().nextInt(3);
 
         if (lokiPower > heroPower*luck){
-            System.out.println(loki.villainName()+" Wins");
+            System.out.println(utils.textRed(loki.villainName()+" Wins"));
             gameOver();
         }
         else {
-            System.out.println("You defeated "+loki.villainName());
+            unsetVillain(loki);
+            hero.setHeroAttack(hero.Attack() + 40);
+            hero.setHeroDefence(hero.Defence() + 40);
+            hero.setHeroHP(hero.HP() + 40);
+            hero.setHeroXP(hero.XP() + 960);
+            utils.successMessage("You defeated "+loki.villainName()+"\n You have been upgraded");
         }
     }
+
+    //Game Play End
 }

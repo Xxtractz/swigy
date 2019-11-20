@@ -3,6 +3,8 @@ package swingy.model;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import javax.validation.constraints.Min;
+
 public class Map {
     private int size;
     private String [][] board;
@@ -29,6 +31,7 @@ public class Map {
         }
     }
 
+    @Min(1)
     public void setSize(int level) {
         this.size = (int) ((level -1) * 5 + 10 - (level*0.02));
     }
@@ -39,12 +42,6 @@ public class Map {
 
     public void updatePosition(int x, int y, String c){
         this.board[x][y] = c;
-    }
-
-    public void VillainPosition(@NotNull int[] x, @NotNull int[] y, String[] c){
-        for (int i = 0; i < x.length ; i++) {
-            this.board[x[i]][y[i]] = c[i];
-        }
     }
 
     public void setBoard() {
