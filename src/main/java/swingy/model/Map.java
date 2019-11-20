@@ -41,7 +41,7 @@ public class Map {
         this.board[x][y] = c;
     }
 
-    public void VillianPosition(@NotNull int[] x, @NotNull int[] y, String[] c){
+    public void VillainPosition(@NotNull int[] x, @NotNull int[] y, String[] c){
         for (int i = 0; i < x.length ; i++) {
             this.board[x[i]][y[i]] = c[i];
         }
