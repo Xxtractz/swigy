@@ -146,8 +146,12 @@ public class Console implements IDisplay {
     private void setThanosLocation(){
         int x = new Random().nextInt(map.getSize());
         int y = new Random().nextInt(map.getSize());
-        thanos.setVillian_X_Cor(x);
-        thanos.setVillian_Y_Cor(y);
+        if (x == map.getSize()/2 && y == map.getSize()/2){
+            setThanosLocation();
+        }else {
+            thanos.setVillian_X_Cor(x);
+            thanos.setVillian_Y_Cor(y);
+        }
     }
 
     private void setLokiLocation(){
@@ -220,6 +224,7 @@ public class Console implements IDisplay {
         }
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         map.printBoard();
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
         movement();
     }
 
@@ -233,7 +238,7 @@ public class Console implements IDisplay {
             endGame();
         }
         hero.setCo_x(hero.co_x() - 1);
-        fight();
+        isFight();
         map.updatePosition(hero.co_x()+1,hero.co_y(),null);
         map.updatePosition(
                 hero.co_x(),
@@ -285,61 +290,87 @@ public class Console implements IDisplay {
         );
     }
 
+    private String isFight(){
+        if ((hero.co_x() == thanos.villian_X_Cor()) &&
+                (hero.co_y() == thanos.villian_Y_Cor())){
+            return thanos.villianName();
+        }
+        if ((hero.co_x() == erik.villian_X_Cor()) &&
+                (hero.co_y() == erik.villian_Y_Cor())){
+            return erik.villianName();
+        }
+        if ((hero.co_x() == loki.villian_X_Cor()) &&
+                (hero.co_y() == loki.villian_Y_Cor())){
+            return loki.villianName();
+        }
+        return "";
+    }
     private void fight(){
         if ((hero.co_x() == thanos.villian_X_Cor()) &&
                 (hero.co_y() == thanos.villian_Y_Cor())){
+            heroVSvillianStats();
             fightThanos();
             gameOver();
         }
         if ((hero.co_x() == erik.villian_X_Cor()) &&
                 (hero.co_y() == erik.villian_Y_Cor())){
+            heroVSvillianStats();
             fightErik();
             gameOver();
         }
         if ((hero.co_x() == loki.villian_X_Cor()) &&
                 (hero.co_y() == loki.villian_Y_Cor())){
+            heroVSvillianStats();
            fightLoki();
             gameOver();
         }
     }
 
+    private void heroVSvillianStats(){
+        System.out.println("Get Ready to Fight\n" +
+                "You are about to Fight -> "+utils.textBlue(thanos.villianName())+
+                "\n Attack              -> "+utils.textBlueInt(thanos.villian_Attack())+ "\t\tYour Attack ->"+utils.textBlueInt(hero.Attack())+
+                "\n Defence             -> "+utils.textBlueInt(thanos.villian_Defence())+ "\t\tYour Defence  ->"+utils.textBlueInt(hero.Defence())+
+                "\n Hit Points          -> "+utils.textBlueInt(thanos.villian_HP()) +"\t\tYour Hit Points ->"+utils.textBlueInt(hero.HP()));
+    }
+
     private void fightThanos(){
         int thanosPower = thanos.villian_Attack() + thanos.villian_Defence() + thanos.villian_HP();
-        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int heroPower = hero.Attack() + hero.Defence()+ hero.HP();
         int luck = new Random().nextInt(3);
 
-        if (thanosPower > heorPower*luck){
-            System.out.println("Thanos Wins");
+        if (thanosPower > heroPower*luck){
+            System.out.println(thanos.villianName()+" Wins");
             gameOver();
         }
         else {
-            System.out.println("You defeated Thanos ");
+            System.out.println("You defeated "+thanos.villianName());
         }
     }
     private void fightErik(){
         int erikPower = erik.villian_Attack() + erik.villian_Defence() + erik.villian_HP();
-        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int heroPower = hero.Attack() + hero.Defence()+ hero.HP();
         int luck = new Random().nextInt(3);
 
-        if (erikPower > heorPower*luck){
-            System.out.println("Thanos Wins");
+        if (erikPower > heroPower*luck){
+            System.out.println(erik.villianName()+" Wins");
             gameOver();
         }
         else {
-            System.out.println("You defeated Thanos ");
+            System.out.println("You defeated "+erik.villianName());
         }
     }
     private void fightLoki(){
         int lokiPower = loki.villian_Attack() + loki.villian_Defence() + loki.villian_HP();
-        int heorPower = hero.Attack() + hero.Defence()+ hero.HP();
+        int heroPower = hero.Attack() + hero.Defence()+ hero.HP();
         int luck = new Random().nextInt(3);
 
-        if (lokiPower > heorPower*luck){
-            System.out.println("Thanos Wins");
+        if (lokiPower > heroPower*luck){
+            System.out.println(loki.villianName()+" Wins");
             gameOver();
         }
         else {
-            System.out.println("You defeated Thanos ");
+            System.out.println("You defeated "+loki.villianName());
         }
     }
 }
