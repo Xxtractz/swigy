@@ -307,11 +307,8 @@ public class Console implements IDisplay {
                 (hero.co_y() == erik.villain_Y_Cor())){
             return true;
         }
-        else if ((hero.co_x() == loki.villain_X_Cor()) &&
-                (hero.co_y() == loki.villain_Y_Cor())){
-            return true;
-        }
-        return false;
+        else return (hero.co_x() == loki.villain_X_Cor()) &&
+                    (hero.co_y() == loki.villain_Y_Cor());
     }
 
     @AssertTrue
