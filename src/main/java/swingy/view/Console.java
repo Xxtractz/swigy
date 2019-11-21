@@ -238,13 +238,6 @@ public class Console implements IDisplay {
         villian.setVillain_Y_Cor(-1);
     }
 
-    public static void clearScreen() {
-
-        System.out.print("\033[H\033[2J");
-
-        System.out.flush();
-
-    }
     //GAME Utils End
 
 
@@ -260,9 +253,6 @@ public class Console implements IDisplay {
     }
 
     private void movement(){
-        System.out.print("\033[H\033[2J");
-
-        System.out.flush();
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         System.out.println("Level : "+utils.textBlueInt(hero.heroLevel())+ "\t\t XP : "+utils.textBlueInt(hero.XP()) + "\t\t HP: "+utils.textBlueInt(hero.HP()));
         System.out.println(utils.textBlue(utils.Asterisk(75)));
