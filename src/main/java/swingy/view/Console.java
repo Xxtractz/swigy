@@ -1,5 +1,6 @@
 package swingy.view;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import swingy.model.*;
 import swingy.model.hero.*;
@@ -220,16 +221,29 @@ public class Console implements IDisplay {
         System.out.println(utils.textYellow(utils.Asterisk(125)));
         System.out.println(utils.textRed(game_data.getGameOverHeader()));
         System.out.println(utils.textYellow(utils.Asterisk(125)));
+        System.out.println(utils.textBlue("Thank You For playing...".toUpperCase()));
+        System.out.println(utils.textYellow(utils.Asterisk(75)));
+        printStat();
+        System.out.println(utils.textYellow(utils.Asterisk(75)));
+        endGame();
     }
 
+    @Contract(" -> fail")
     private void endGame(){
-        gameOver();
-        System.exit(0);
+        System.exit(1);
     }
 
     private void unsetVillain(@NotNull Villain villian){
         villian.setVillain_X_Cor(-1);
         villian.setVillain_Y_Cor(-1);
+    }
+
+    public static void clearScreen() {
+
+        System.out.print("\033[H\033[2J");
+
+        System.out.flush();
+
     }
     //GAME Utils End
 
@@ -246,6 +260,11 @@ public class Console implements IDisplay {
     }
 
     private void movement(){
+        System.out.print("\033[H\033[2J");
+
+        System.out.flush();
+        System.out.println(utils.textBlue(utils.Asterisk(75)));
+        System.out.println("Level : "+utils.textBlueInt(hero.heroLevel())+ "\t\t XP : "+utils.textBlueInt(hero.XP()) + "\t\t HP: "+utils.textBlueInt(hero.HP()));
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         stdInput.nextLine();
         System.out.println("Please Make a Move\n" +
@@ -430,5 +449,5 @@ public class Console implements IDisplay {
         }
     }
 
-    //Game Play End
+    //  Game Play End
 }
