@@ -50,8 +50,7 @@ public class GameData {
                 "       LL     EE     V     V   EE    LL         u     u  pp   pp             \n"+
                 "       LL     EEEE    V   V    EEEE  LL         u     u  pppppp            \n"+
                 "       LL     EE       V V     EE    LL         u     u  pp               \n"+
-                "       LLLLLL EEEEE     V      EEEEE LLLLL      uuuuuuu  pp                \n"+
-                "                           \n";
+                "       LLLLLL EEEEE     V      EEEEE LLLLL      uuuuuuu  pp                \n";
     }
 
 }

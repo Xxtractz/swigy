@@ -26,6 +26,7 @@ public class Console implements IDisplay {
     private Villain thanos;
     private Villain loki;
     private Villain erik;
+    private Save save;
 
     public Console(){
         stdInput    = new Scanner(System.in);
@@ -36,6 +37,7 @@ public class Console implements IDisplay {
         erik = new Erik();
         thanos = new Thanos();
         loki = new Loki();
+        save = new Save();
     }
 
     //START Initiation Stage Game
@@ -286,6 +288,7 @@ public class Console implements IDisplay {
 
     private void movement(){
         canLevelUp();
+        save.saveStage(hero,player.getPlayerName());
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         System.out.println("Level : "+utils.textBlueInt(hero.heroLevel())+ "\t\t XP : "+utils.textBlueInt(hero.XP()) + "\t\t HP: "+utils.textBlueInt(hero.HP()));
         System.out.println(utils.textBlue(utils.Asterisk(75)));
