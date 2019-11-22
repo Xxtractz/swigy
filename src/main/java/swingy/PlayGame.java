@@ -5,6 +5,6 @@ import swingy.controller.GameController;
 public class PlayGame {
 
     public static void main(String[] args) {
-        new GameController("console".toUpperCase());
+        new GameController("gui".toUpperCase());
     }
 }
