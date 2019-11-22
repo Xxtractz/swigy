@@ -248,8 +248,9 @@ public class Console implements IDisplay {
         villian.setVillain_Y_Cor(-1);
     }
 
-    private void canlevelup(){
-        if (hero.XP() >= nextlevel()){
+
+    private void canLevelUp(){
+        if (hero.XP() >= nextLevel()){
             hero.setHeroLevel(hero.heroLevel()+1);
             System.out.println(utils.textBlue(utils.Asterisk(75)));
             System.out.println(utils.textYellow(game_data.leveledUp()));
@@ -259,10 +260,16 @@ public class Console implements IDisplay {
         }
     }
 
-    private int nextlevel(){
+    private int nextLevel(){
         return (int) (hero.heroLevel() * 1000+ Math.pow((hero.heroLevel() - 1), 2)*450);
     }
 
+    private void killGame(){
+        System.out.println(utils.textYellow(utils.Asterisk(125)));
+        System.out.println(utils.textBlue("Thank You For playing...".toUpperCase()));
+        System.out.println(utils.textYellow(utils.Asterisk(75)));
+        System.exit(1);
+    }
     //GAME Utils End
 
 
@@ -278,7 +285,7 @@ public class Console implements IDisplay {
     }
 
     private void movement(){
-        canlevelup();
+        canLevelUp();
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         System.out.println("Level : "+utils.textBlueInt(hero.heroLevel())+ "\t\t XP : "+utils.textBlueInt(hero.XP()) + "\t\t HP: "+utils.textBlueInt(hero.HP()));
         System.out.println(utils.textBlue(utils.Asterisk(75)));
@@ -293,7 +300,7 @@ public class Console implements IDisplay {
             int _heroMove = stdInput.nextInt();
             switch (_heroMove) {
                 case 0:
-                    endGame();
+                    killGame();
                     break;
                 case 1:
                     moveNorth();
