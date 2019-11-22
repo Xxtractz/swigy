@@ -12,6 +12,7 @@ import swingy.utils_swingy.SwingyUtils;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 import java.lang.*;
@@ -85,8 +86,26 @@ public class Console implements IDisplay {
 
     @Override
     public void selectHero() {
-        gameOver();
+        ArrayList<String> list;
+        list = save.getHero(player.getPlayerName());
+        getHeroClass(list.get(0));
+        hero.setHeroLevel(Integer.parseInt(list.get(2)));
+        hero.setHeroXP(Integer.parseInt(list.get(3)));
+        hero.setHeroAttack(Integer.parseInt(list.get(4)));
+        hero.setHeroDefence(Integer.parseInt(list.get(5)));
+        hero.setHeroHP(Integer.parseInt(list.get(6)));
+        printStat();
         System.exit(0);
+    }
+
+    private void getHeroClass(String heroName){
+        if ("Thor".equals(heroName)) {
+            hero = new Thor();
+        } else if ("Iron Man".equals(heroName)) {
+            hero = new IronMan();
+        } else if ("Black Panther".equals(heroName)) {
+            hero = new BlackPanther();
+        }
     }
 
     @Override

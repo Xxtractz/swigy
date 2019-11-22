@@ -3,15 +3,18 @@ package swingy.model;
 import swingy.model.hero.Hero;
 
 import javax.validation.constraints.NotNull;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Save {
 
     public void saveStage(@NotNull Hero hero,@NotNull String playerName){
         try {
-            String filename = playerName + ".txt";
-            FileWriter writer = new FileWriter(filename, true);
+            String filename = "./src/main/resources/history/"+playerName.toLowerCase() + ".txt";
+            FileWriter writer = new FileWriter(filename, false);
             writer.write("HeroName :"+hero.heroName()); // hero Name
             writer.write("\r\n");   // write new line
             writer.write("HeroFlag :"+hero.heroFlag());
@@ -30,5 +33,23 @@ public class Save {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<String> getHero(@NotNull String playerName){
+        ArrayList<String> hero = new ArrayList<String>();
+        try {
+            String filename = "./src/main/resources/history/"+playerName.toLowerCase() + ".txt";
+            FileReader reader = new FileReader(filename);
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] arrOfStr = line.split(":");
+                hero.add(arrOfStr[1]);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hero;
     }
 }

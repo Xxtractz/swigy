@@ -41,7 +41,9 @@ public class Map {
     }
 
     public void updatePosition(int x, int y, String c){
-        this.board[x][y] = c;
+        if (x < size && y < size){
+            this.board[x][y] = c;
+        }
     }
 
     public void setBoard() {
