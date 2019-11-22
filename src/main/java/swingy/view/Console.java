@@ -91,11 +91,9 @@ public class Console implements IDisplay {
         getHeroClass(list.get(0));
         hero.setHeroLevel(Integer.parseInt(list.get(2)));
         hero.setHeroXP(Integer.parseInt(list.get(3)));
-        hero.setHeroAttack(Integer.parseInt(list.get(4)));
-        hero.setHeroDefence(Integer.parseInt(list.get(5)));
-        hero.setHeroHP(Integer.parseInt(list.get(6)));
-        printStat();
-        System.exit(0);
+        hero.setHeroHP(Integer.parseInt(list.get(4)));
+        hero.setHeroAttack(Integer.parseInt(list.get(5)));
+        hero.setHeroDefence(Integer.parseInt(list.get(6)));
     }
 
     private void getHeroClass(String heroName){
