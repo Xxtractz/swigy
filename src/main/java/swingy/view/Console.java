@@ -238,6 +238,10 @@ public class Console implements IDisplay {
         villian.setVillain_Y_Cor(-1);
     }
 
+    private void canlevelup(){
+
+    }
+
     //GAME Utils End
 
 
@@ -253,6 +257,7 @@ public class Console implements IDisplay {
     }
 
     private void movement(){
+        canlevelup();
         System.out.println(utils.textBlue(utils.Asterisk(75)));
         System.out.println("Level : "+utils.textBlueInt(hero.heroLevel())+ "\t\t XP : "+utils.textBlueInt(hero.XP()) + "\t\t HP: "+utils.textBlueInt(hero.HP()));
         System.out.println(utils.textBlue(utils.Asterisk(75)));
@@ -264,26 +269,28 @@ public class Console implements IDisplay {
                 "4. Move West\n" +
                 utils.textRed("********Enter 0 to Exit*********"));
         if (stdInput.hasNextInt()){
-        int _heroMove = stdInput.nextInt();
-        switch (_heroMove) {
-            case 0:
-                endGame();
-                break;
-            case 1:
-                moveNorth();
-                break;
-            case 2:
-                moveEast();
-                break;
-            case 3:
-                moveSouth();
-                break;
-            case 4:
-                moveWest();
-                break;
-            default:
-                System.err.println("Invalid Entry....");
-        }}else {
+            int _heroMove = stdInput.nextInt();
+            switch (_heroMove) {
+                case 0:
+                    endGame();
+                    break;
+                case 1:
+                    moveNorth();
+                    break;
+                case 2:
+                    moveEast();
+                    break;
+                case 3:
+                    moveSouth();
+                    break;
+                case 4:
+                    moveWest();
+                    break;
+                default:
+                    System.err.println("Invalid Entry....");
+            }
+            hero.setHeroXP(hero.XP() + 10);
+        }else {
             System.err.println("Invalid Entry....");
             movement();
         }
