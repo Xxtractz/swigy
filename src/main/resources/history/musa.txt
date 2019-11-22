@@ -1,0 +1,7 @@
+HeroName :Thor
+HeroFlag :T
+HeroLevel :1
+HeroXP :90
+HeroHP :100
+HeroAttack :100
+HeroDefence :55
