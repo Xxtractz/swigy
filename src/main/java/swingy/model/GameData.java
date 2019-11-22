@@ -44,4 +44,14 @@ public class GameData {
                 "\t\t\t\tGood Luck on your Journey... STAY AWAY FROM THANOS at a lower Level";
     }
 
+    public  String leveledUp() {
+        return
+                "       LL     EEEEE V       V  EEEEE LL         u     u  pppppp                \n"+
+                "       LL     EE     V     V   EE    LL         u     u  pp   pp             \n"+
+                "       LL     EEEE    V   V    EEEE  LL         u     u  pppppp            \n"+
+                "       LL     EE       V V     EE    LL         u     u  pp               \n"+
+                "       LLLLLL EEEEE     V      EEEEE LLLLL      uuuuuuu  pp                \n"+
+                "                           \n";
+    }
+
 }

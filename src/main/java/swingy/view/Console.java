@@ -230,6 +230,16 @@ public class Console implements IDisplay {
 
     @Contract(" -> fail")
     private void endGame(){
+        stdInput.nextLine();
+        System.out.println("Would you like to continue\n" +
+                "1. Yes\n2. No \n"+
+                utils.textRed("********Enter 0 to Exit*********"));
+        int opt = stdInput.nextInt();{
+            if (opt == 1){
+                beforePlay();
+                playGame();
+            }
+        }
         System.exit(1);
     }
 
@@ -239,7 +249,18 @@ public class Console implements IDisplay {
     }
 
     private void canlevelup(){
+        if (hero.XP() >= nextlevel()){
+            hero.setHeroLevel(hero.heroLevel()+1);
+            System.out.println(utils.textBlue(utils.Asterisk(75)));
+            System.out.println(utils.textYellow(game_data.leveledUp()));
+            System.out.println(utils.textBlue(utils.Asterisk(75)));
+            beforePlay();
+            playGame();
+        }
+    }
 
+    private int nextlevel(){
+        return (int) (hero.heroLevel() * 1000+ Math.pow((hero.heroLevel() - 1), 2)*450);
     }
 
     //GAME Utils End
