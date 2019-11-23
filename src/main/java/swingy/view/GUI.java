@@ -30,6 +30,32 @@ public class GUI implements IDisplay {
     private Villain erik;
     private Save save;
     private JFrame frame;
+    private Container con;
+
+    private JButton jButton1;
+    private JButton jButton2;
+    private JButton jButton3;
+    private JButton jButton4;
+
+    private JLabel _playerName;
+    private JLabel _playerNameHolder;
+    private JLabel _heroName;
+    private JLabel _heroNameHolder;
+    private JLabel _heroFlag;
+    private JLabel _heroFlagHolder;
+    private JLabel _heroLevel;
+    private JLabel _heroLevelHolder;
+    private JLabel _heroXP;
+    private JLabel _heroXPHolder;
+    private JLabel _heroHP;
+    private JLabel _heroHPHolder;
+    private JLabel _heroAttack;
+    private JLabel _heroAttackHolder;
+    private JLabel _heroDefence;
+    private JLabel _heroDefenceHolder;
+    private JPanel jPanel1;
+    private JPanel jPanel2;
+    private JPanel jPanel3;
 
     public GUI(){
         gameData = new GameData();
@@ -41,11 +67,42 @@ public class GUI implements IDisplay {
         loki = new Loki();
         save = new Save();
         frame = new JFrame();
+        con = frame.getContentPane();
+
+//        PANES
+        jPanel1 = new JPanel();
+        jPanel2 = new  JPanel();
+        jPanel3 = new JPanel();
+
+//        Buttons
+        jButton1 = new JButton();
+        jButton4 = new JButton();
+        jButton2 = new JButton();
+        jButton3 = new JButton();
+
+//        LABELS
+        _playerName         = new JLabel();
+        _playerNameHolder   = new JLabel();
+        _heroLevel          = new JLabel();
+        _heroLevelHolder    = new JLabel();
+        _heroName           = new JLabel();
+        _heroNameHolder     = new JLabel();
+        _heroFlag           = new JLabel();
+        _heroFlagHolder     = new JLabel();
+        _heroLevel          = new JLabel();
+        _heroLevelHolder    = new JLabel();
+        _heroXP             = new JLabel();
+        _heroXPHolder       = new JLabel();
+        _heroHP             = new JLabel();
+        _heroHPHolder       = new JLabel();
+        _heroAttack         = new JLabel();
+        _heroAttackHolder   = new JLabel();
+        _heroDefence        = new JLabel();
     }
     @Override
     public void initGame() {
 
-        JOptionPane.showMessageDialog(null,"$$$$$$$$$ Swingy $$$$$$$$$$$".toUpperCase()+"\n"+gameData.gameInstructions());
+//        JOptionPane.showMessageDialog(null,"$$$$$$$$$ Swingy $$$$$$$$$$$".toUpperCase()+"\n"+gameData.gameInstructions());
         getUser();
         getHero();
         beforePlay();
@@ -155,11 +212,42 @@ public class GUI implements IDisplay {
 
     @Override
     public void playGame() {
-
-        frame.setLayout(new GridLayout());
-        frame.setSize(1080,800);
+//        Activating Window Basics
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800,800);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+//      Container
+        con.setLayout(new BorderLayout(10,8));
+        con.setBackground(Color.WHITE);
+
+        /*
+        * Adding Panel
+        * */
+        jPanel1.setBackground(Color.gray);
+        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER));
+        con.add(jPanel1, BorderLayout.NORTH);
+
+        /*
+        * LABELS On Panel
+        * */
+        _playerName.setText("Player Name : ");
+        _playerNameHolder.setText(player.getPlayerName());
+        _playerNameHolder.setForeground(Color.BLUE);
+        _heroLevel.setText("\t\tLevel : ");
+        _heroLevelHolder.setText(""+hero.heroLevel());
+        _heroLevelHolder.setForeground(Color.BLUE);
+        _heroXP.setText("\t\tXP : ");
+        _heroXPHolder.setText(""+hero.XP());
+        _heroXPHolder.setForeground(Color.BLUE);
+
+        jPanel1.add(_playerName);
+        jPanel1.add(_playerNameHolder);
+        jPanel1.add(_heroLevel);
+        jPanel1.add(_heroLevelHolder);
+        jPanel1.add(_heroXP);
+        jPanel1.add(_heroXPHolder);
+
     }
 
 }
