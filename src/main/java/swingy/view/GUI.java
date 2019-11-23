@@ -14,6 +14,7 @@ import swingy.model.villain.Villain;
 import swingy.utils_swingy.SwingyUtils;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
@@ -55,8 +56,9 @@ public class GUI implements IDisplay {
     private JLabel _heroDefenceHolder;
     private JLabel _map;
     private JPanel topPanel;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
+    private JPanel SidePanel;
+    private JPanel controls;
+    private JPanel name_Stats;
 
     public GUI(){
         gameData = new GameData();
@@ -72,14 +74,15 @@ public class GUI implements IDisplay {
 
 //        PANES
         topPanel = new JPanel();
-        jPanel2 = new  JPanel();
-        jPanel3 = new JPanel();
+        SidePanel = new  JPanel();
+        controls = new JPanel();
+        name_Stats = new JPanel();
 
 //        Buttons
-        south = new JButton();
-        north = new JButton();
-        east = new JButton();
-        west = new JButton();
+        south = new JButton("South");
+        north = new JButton("North");
+        east = new JButton("East");
+        west = new JButton("West");
 
 //        LABELS
         _playerName         = new JLabel();
@@ -99,7 +102,7 @@ public class GUI implements IDisplay {
         _heroAttack         = new JLabel();
         _heroAttackHolder   = new JLabel();
         _heroDefence        = new JLabel();
-        _map        = new JLabel();
+        _map        = new JLabel("",SwingConstants.CENTER);
 
     }
     @Override
@@ -109,6 +112,8 @@ public class GUI implements IDisplay {
         getUser();
         getHero();
         beforePlay();
+
+        runGame();
     }
 
     @Override
@@ -187,6 +192,12 @@ public class GUI implements IDisplay {
             erik.setVillain_Y_Cor(y);
         }
     }
+    private void populateBoard(){
+        map.updatePosition(hero.co_x(),hero.co_y(),hero.heroFlag());
+        map.updatePosition(thanos.villain_X_Cor(),thanos.villain_Y_Cor(),thanos.villainFlag());
+        map.updatePosition(loki.villain_X_Cor(),loki.villain_Y_Cor(),loki.villainFlag());
+        map.updatePosition(erik.villain_X_Cor(),erik.villain_Y_Cor(),erik.villainFlag());
+    }
 
     @Override
     public void createHero() {
@@ -215,9 +226,15 @@ public class GUI implements IDisplay {
 
     @Override
     public void playGame() {
-//        Activating Window Basics
+
+    }
+
+    private void runGame(){
+        map.setBoard();
+        populateBoard();
+        //        Activating Window Basics
         frame.setVisible(true);
-        frame.setSize(800,800);
+        frame.setSize(1200,800);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 //      Container
@@ -225,15 +242,15 @@ public class GUI implements IDisplay {
         con.setBackground(Color.WHITE);
 
         /*
-        * Adding top Panel
-        * */
+         * Adding top Panel
+         * */
         topPanel.setBackground(Color.gray);
         topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         con.add(topPanel, BorderLayout.NORTH);
 
         /*
-        * LABELS for Panel
-        * */
+         * LABELS for Panel
+         * */
         _playerName.setText("Player Name : ");
         _playerNameHolder.setText(player.getPlayerName());
         _playerNameHolder.setForeground(Color.BLUE);
@@ -245,8 +262,8 @@ public class GUI implements IDisplay {
         _heroXPHolder.setForeground(Color.BLUE);
 
         /*
-        * Add to Panel
-        * */
+         * Add to Panel
+         * */
         topPanel.add(_playerName);
         topPanel.add(_playerNameHolder);
         topPanel.add(_heroLevel);
@@ -254,15 +271,49 @@ public class GUI implements IDisplay {
         topPanel.add(_heroXP);
         topPanel.add(_heroXPHolder);
 
+        /*
+         * Adding Middle Panel
+         * */
+        SidePanel.setLayout(new GridLayout(6,4,5,5));
+        SidePanel.setBorder(new LineBorder(Color.black));
+        SidePanel.setBackground(Color.gray);
+
+        controls.setLayout(new GridLayout(4,1,5,5));
+        controls.setBorder(new LineBorder(Color.BLACK));
 
         /*
-        * Adding Middle Panel
-        * */
+         * Buttons
+         * */
+        controls.add(south);
+        controls.add(north);
+        controls.add(west);
+        controls.add(east);
 
-        _map.setText("Map");
-        _map.setIconTextGap(SwingConstants.CENTER);
+        /*
+         * LABELS for MiddlePanel
+         * */
+        _heroName.setText(" Hero Name : ");
+        _heroNameHolder.setText(" "+hero.heroName());
+        _playerNameHolder.setForeground(Color.BLUE);
+        _heroLevel.setText("Level : ");
+        _heroLevelHolder.setText(""+hero.heroLevel());
+        _heroLevelHolder.setForeground(Color.BLUE);
+        _heroXP.setText("XP : ");
+        _heroXPHolder.setText(""+hero.XP());
+        _heroXPHolder.setForeground(Color.BLUE);
+
+        _map.setText(map.getBoard());
+        _map.setOpaque(true);
+        _map.setBorder(new LineBorder(Color.BLACK,1));
+
+        name_Stats.setLayout(new FlowLayout(FlowLayout.CENTER));
+        name_Stats.setBorder(new LineBorder(Color.BLACK));
+        name_Stats.add(_heroName);
+        name_Stats.add(_heroNameHolder);
+
+        SidePanel.add(name_Stats);
+        SidePanel.add(controls);
         con.add(_map);
-
+        con.add(SidePanel, BorderLayout.WEST);
     }
-
 }

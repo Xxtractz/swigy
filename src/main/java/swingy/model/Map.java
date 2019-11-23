@@ -1,7 +1,6 @@
 package swingy.model;
 
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import javax.validation.constraints.Min;
 
@@ -30,6 +29,29 @@ public class Map {
             System.out.print("\n");
         }
     }
+
+    public String getBoard(){
+        StringBuilder _board;
+
+        _board = new StringBuilder();
+        for(int row = 0;row  < size; row++){
+            int column;
+            for (column = 0; column < size ; column++) {
+                if (board[row][column] == null) {
+                    _board.append("| . ");
+                }
+                else {
+                    _board.append("| ").append(board[row][column]).append(" ");
+                }
+            }
+            if (column == size) {
+                _board.append("|");
+            }
+            _board.append("\n");
+        }
+        return _board.toString();
+    }
+
 
     @Min(1)
     public void setSize(int level) {
