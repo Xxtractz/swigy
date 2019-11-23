@@ -1,4 +1,5 @@
 package swingy.view;
+import swingy.controller.GameController;
 import swingy.model.GameData;
 import swingy.model.Map;
 import swingy.model.Player;
@@ -109,11 +110,12 @@ public class GUI implements IDisplay {
     public void initGame() {
 
 //        JOptionPane.showMessageDialog(null,"$$$$$$$$$ Swingy $$$$$$$$$$$".toUpperCase()+"\n"+gameData.gameInstructions());
-        getUser();
-        getHero();
-        beforePlay();
+//        getUser();
+//        getHero();
+//        beforePlay();
+        JOptionPane.showMessageDialog(null,"Please Use The console Version for Now");
 
-        runGame();
+        new GameController("console".toUpperCase());
     }
 
     @Override
