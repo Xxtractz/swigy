@@ -32,10 +32,10 @@ public class GUI implements IDisplay {
     private JFrame frame;
     private Container con;
 
-    private JButton jButton1;
-    private JButton jButton2;
-    private JButton jButton3;
-    private JButton jButton4;
+    private JButton south;
+    private JButton north;
+    private JButton east;
+    private JButton west;
 
     private JLabel _playerName;
     private JLabel _playerNameHolder;
@@ -53,7 +53,8 @@ public class GUI implements IDisplay {
     private JLabel _heroAttackHolder;
     private JLabel _heroDefence;
     private JLabel _heroDefenceHolder;
-    private JPanel jPanel1;
+    private JLabel _map;
+    private JPanel topPanel;
     private JPanel jPanel2;
     private JPanel jPanel3;
 
@@ -70,15 +71,15 @@ public class GUI implements IDisplay {
         con = frame.getContentPane();
 
 //        PANES
-        jPanel1 = new JPanel();
+        topPanel = new JPanel();
         jPanel2 = new  JPanel();
         jPanel3 = new JPanel();
 
 //        Buttons
-        jButton1 = new JButton();
-        jButton4 = new JButton();
-        jButton2 = new JButton();
-        jButton3 = new JButton();
+        south = new JButton();
+        north = new JButton();
+        east = new JButton();
+        west = new JButton();
 
 //        LABELS
         _playerName         = new JLabel();
@@ -98,6 +99,8 @@ public class GUI implements IDisplay {
         _heroAttack         = new JLabel();
         _heroAttackHolder   = new JLabel();
         _heroDefence        = new JLabel();
+        _map        = new JLabel();
+
     }
     @Override
     public void initGame() {
@@ -222,31 +225,43 @@ public class GUI implements IDisplay {
         con.setBackground(Color.WHITE);
 
         /*
-        * Adding Panel
+        * Adding top Panel
         * */
-        jPanel1.setBackground(Color.gray);
-        jPanel1.setLayout(new FlowLayout(FlowLayout.CENTER));
-        con.add(jPanel1, BorderLayout.NORTH);
+        topPanel.setBackground(Color.gray);
+        topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        con.add(topPanel, BorderLayout.NORTH);
 
         /*
-        * LABELS On Panel
+        * LABELS for Panel
         * */
         _playerName.setText("Player Name : ");
         _playerNameHolder.setText(player.getPlayerName());
         _playerNameHolder.setForeground(Color.BLUE);
-        _heroLevel.setText("\t\tLevel : ");
+        _heroLevel.setText("Level : ");
         _heroLevelHolder.setText(""+hero.heroLevel());
         _heroLevelHolder.setForeground(Color.BLUE);
-        _heroXP.setText("\t\tXP : ");
+        _heroXP.setText("XP : ");
         _heroXPHolder.setText(""+hero.XP());
         _heroXPHolder.setForeground(Color.BLUE);
 
-        jPanel1.add(_playerName);
-        jPanel1.add(_playerNameHolder);
-        jPanel1.add(_heroLevel);
-        jPanel1.add(_heroLevelHolder);
-        jPanel1.add(_heroXP);
-        jPanel1.add(_heroXPHolder);
+        /*
+        * Add to Panel
+        * */
+        topPanel.add(_playerName);
+        topPanel.add(_playerNameHolder);
+        topPanel.add(_heroLevel);
+        topPanel.add(_heroLevelHolder);
+        topPanel.add(_heroXP);
+        topPanel.add(_heroXPHolder);
+
+
+        /*
+        * Adding Middle Panel
+        * */
+
+        _map.setText("Map");
+        _map.setIconTextGap(SwingConstants.CENTER);
+        con.add(_map);
 
     }
 
