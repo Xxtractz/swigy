@@ -1,7 +1,7 @@
-HeroName :Thor
-HeroFlag :T
-HeroLevel :1
-HeroXP :90
-HeroHP :100
-HeroAttack :100
-HeroDefence :55
+HeroName :Iron Man
+HeroFlag :I
+HeroLevel :2
+HeroXP :1040
+HeroHP :140
+HeroAttack :133
+HeroDefence :120
